@@ -89,3 +89,18 @@ authorities rather than silently treated as philosophers.
 The next increment can import the deduplicated candidate inventory into
 the public preview, preserving the status and provenance of our existing
 text-checked *Meno* 76c–d record. That import is not part of this first scan.
+
+## Connected website preview
+
+The Pages and CI preview now call `bash preview/build-with-meno.sh`.
+This program regenerates the extracted candidate metadata and merges it
+with the curated record list **at build time**, rather than requiring manual
+data entry or editing of a committed JSON file. The published website
+contains only the resulting brief candidate metadata, citation links, and
+attribution; it never includes the downloaded Greek source.
+
+Candidate identities must already be registered in the app's canonical
+`THINKERS` registry. Deduplication uses dialogue + Stephanus starting
+section + thinker ID. The checked *Meno* 76c–d record wins over the
+automated match and retains its reviewer/source notes. No automatic
+candidate is marked `text_checked` or `verified`.

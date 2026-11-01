@@ -108,10 +108,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Build rights-limited concordance preview
-        run: node --experimental-strip-types preview/build.mjs
-      - name: Verify preview and publication inventory
-        run: node --experimental-strip-types --test preview/check.test.mjs
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Extract Meno records, build and test the preview
+        run: bash preview/build-with-meno.sh
       - name: Save preview as a downloadable artifact
         uses: actions/upload-artifact@v4
         with:

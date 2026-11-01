@@ -1,21 +1,41 @@
-# Rights-limited visual preview
+# Rights-limited visual preview (Meno scanner integrated)
 
-This is a **standalone research-interface preview**, not a publication of the
-entire forked Plato Reader. It is generated from
-\`app/src/lib/thinker-concordance.ts\`, so its records and candidate/verified
-counts share the application's existing data model.
+The public preview is generated from two inputs: (1) the original,
+human-curated research records in `app/src/lib/thinker-concordance.ts`; and
+(2) the automatically extracted, **candidate-only** name locations from the
+pinned Perseus Greek *Meno*.
 
-Build: \`node --experimental-strip-types preview/build.mjs\`
-Test: \`node --experimental-strip-types --test preview/check.test.mjs\`
+The build process is identical in CI and GitHub Pages:
 
-CI runs both commands with Node 22 and uploads exactly three files from
-\`preview/dist/\`: \`index.html\`, \`LICENSE.txt\`, and \`.nojekyll\`.
+```sh
+bash preview/build-with-meno.sh
+```
 
-No TLG data or Loeb English text is copied. No inherited font or image files,
-custom domain, feedback addresses, or public app build outputs are included.
-External links lead to Boyer's independently hosted reader. The required
-original MIT notice is included for attribution. Individual original research
-claims are still unverified until the audit requirements are satisfied.
+It downloads the pinned Perseus Greek TEI to a **temporary directory**,
+executes `research/meno_name_scan.py` and compares its output with
+`research/meno_expected.json`, then merges the JSON output using
+`preview/merge-candidates.mjs`. Records are uniquely keyed by dialogue,
+Stephanus start section, and thinker identity. An existing human-reviewed
+record always takes precedence, preserving *Meno* 76c–d as `text_checked`.
+The independent *Theaetetus* 152e candidate remains unchanged.
 
-GitHub Pages is **not enabled or published by this commit**. Publishing is a
-separate, explicit configuration step after CI verifies the generated output.
+The site displays 18 passage records, 7 indexed thinkers, 1 text-checked
+record, and 0 fully verified engagements: 16 new automatic candidates
+plus the original 2 human-managed records. These totals describe **our
+current audited name lexicon**, not all historical thinkers in Plato.
+
+The output contains only:
+- `index.html` (metadata, names, source references, links)
+- `LICENSE.txt` (original MIT notice)
+- `.nojekyll`
+
+**The input Greek TEI, the generated JSON report, and any English
+translations are never deployed or committed.** Names and Stephanus references
+are displayed, not passage texts. The scanner's pinned Perseus source URL,
+license, and provisional machine provenance are shown. The site links to John
+Boyer’s independently hosted reader, instead of rehosting his Greek texts.
+
+Both `preview/merge-candidates.test.mjs` and
+`preview/check.test.mjs` run in CI and before Pages deployment. Failure
+to download or pass the source audit blocks deployment rather than silently
+dropping records or lowering review status.

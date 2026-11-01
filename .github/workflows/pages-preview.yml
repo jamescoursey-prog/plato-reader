@@ -31,11 +31,13 @@ jobs:
         with:
           node-version: 22
 
-      - name: Build isolated preview with no licensed reading text
-        run: node --experimental-strip-types preview/build.mjs
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
-      - name: Verify published file inventory
-        run: node --experimental-strip-types --test preview/check.test.mjs
+      - name: Extract Meno metadata and build isolated preview
+        run: bash preview/build-with-meno.sh
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5

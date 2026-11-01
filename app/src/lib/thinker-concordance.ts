@@ -40,6 +40,12 @@ export const PILOT_WORKS = ['Meno', 'Theaetetus', 'Sophist'] as const;
 
 export const THINKERS: readonly Thinker[] = [
   { id: 'empedocles', name: 'Empedocles', greekName: 'Ἐμπεδοκλῆς', historicalConfidence: 'secure' },
+  { id: 'gorgias', name: 'Gorgias', greekName: 'Γοργίας', historicalConfidence: 'secure' },
+  { id: 'prodicus', name: 'Prodicus', greekName: 'Πρόδικος', historicalConfidence: 'secure' },
+  { id: 'pindar', name: 'Pindar', greekName: 'Πίνδαρος', historicalConfidence: 'secure' },
+  { id: 'protagoras', name: 'Protagoras', greekName: 'Πρωταγόρας', historicalConfidence: 'secure' },
+  { id: 'theognis', name: 'Theognis', greekName: 'Θέογνις', historicalConfidence: 'secure' },
+  { id: 'homer', name: 'Homer', greekName: 'Ὅμηρος', historicalConfidence: 'disputed' },
 ];
 
 export const ENGAGEMENTS: readonly Engagement[] = [

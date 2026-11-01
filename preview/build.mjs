@@ -8,6 +8,15 @@ import {
   THINKERS, ENGAGEMENTS, PILOT_WORKS,
   verifiedEngagements, distinctIndexedThinkerCount,
 } from '../app/src/lib/thinker-concordance.ts';
+import { mergeCandidates } from './merge-candidates.mjs';
+
+if (process.argv.length !== 3) {
+  throw new Error('Usage: node --experimental-strip-types preview/build.mjs <audited-meno-candidates.json>');
+}
+const report = JSON.parse(await readFile(process.argv[2], 'utf8'));
+const merged = mergeCandidates(report);
+const allRecords = merged.records;
+const allThinkers = merged.thinkers;
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, '..');
@@ -16,7 +25,7 @@ const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (c) =>
   ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
 function renderRecord(e) {
-  const person = THINKERS.find((p) => p.id === e.thinkerId);
+  const person = allThinkers.find((p) => p.id === e.thinkerId);
   if (!person) throw new Error('Unresolved thinker ID: ' + e.thinkerId);
   const statusLabels = {
     candidate: 'Awaiting source verification',
@@ -33,7 +42,7 @@ function renderRecord(e) {
   const kind = types[e.kind];
   if (!status || !kind) throw new Error('Invalid record status or kind: ' + e.id);
   const search = [person.name, person.greekName, e.workId, e.stephanus,
-    e.doctrinalClaim, e.interpretiveNote].join(' ').toLocaleLowerCase();
+    e.doctrinalClaim, e.interpretiveNote, e.category, ...(e.detectedForms ?? [])].join(' ').toLocaleLowerCase();
   const reader = new URL(e.sourceIdentifier ??
     ('/' + encodeURIComponent(e.workId) + '/book/1/'),
     'https://plato.johnhboyer.com');
@@ -49,7 +58,7 @@ function renderRecord(e) {
     '<h3>' + escapeHtml(person.name) + ' <span lang="grc">' +
       escapeHtml(person.greekName) + '</span></h3>',
     '</div><span class="status">' + escapeHtml(status) + '</span></div>',
-    '<p class="kind">' + escapeHtml(kind) + '</p>',
+    '<p class="kind">' + escapeHtml(kind) + (e.category ? ' · ' + escapeHtml(e.category) : '') + '</p>',
     '<p class="claim">' + escapeHtml(e.doctrinalClaim) + '</p>',
     '<p class="note">' + escapeHtml(e.interpretiveNote) + '</p>',
     '<dl class="audit">',
@@ -61,6 +70,9 @@ function renderRecord(e) {
     '<div><dt>Reviewer</dt><dd>' + escapeHtml(e.reviewedBy || 'Pending') + '</dd></div>',
     '</dl>',
     '<p class="review">' + escapeHtml(e.reviewNote || 'No review note entered.') + '</p>',
+    (e.extractionSourceUrl ? '<p class="provenance">Machine evidence: ' +
+      '<a target="_blank" rel="noopener noreferrer" href="' + escapeHtml(e.extractionSourceUrl) +
+      '">Pinned Perseus Greek TEI</a>; citation ' + escapeHtml(e.extractionSourceURN || '') + '</p>' : ''),
     '<a class="reader" href="' + escapeHtml(reader.href) +
       '" target="_blank" rel="noopener noreferrer">Read in John Boyer’s Plato Reader ↗</a>',
     '</article>',
@@ -69,13 +81,15 @@ function renderRecord(e) {
 
 let html = await readFile(resolve(here, 'template.html'), 'utf8');
 const replacements = {
-  '%%PASSAGES%%': String(ENGAGEMENTS.length),
-  '%%INDEXED_THINKERS%%': String(distinctIndexedThinkerCount(ENGAGEMENTS)),
-  '%%TEXT_CHECKED%%': String(ENGAGEMENTS.filter((e) => e.status === 'text_checked').length),
-  '%%VERIFIED%%': String(verifiedEngagements(ENGAGEMENTS).length),
+  '%%PASSAGES%%': String(allRecords.length),
+  '%%INDEXED_THINKERS%%': String(distinctIndexedThinkerCount(allRecords)),
+  '%%TEXT_CHECKED%%': String(allRecords.filter((e) => e.status === 'text_checked').length),
+  '%%VERIFIED%%': String(verifiedEngagements(allRecords).length),
+  '%%AUTOMATED_CANDIDATES%%': String(merged.machineCandidates),
+  '%%SOURCE_ATTRIBUTION%%': escapeHtml(merged.source),
   '%%PILOT_WORKS%%': escapeHtml(PILOT_WORKS.join(' · ')),
-  '%%RECORDS%%': ENGAGEMENTS.map(renderRecord).join('\n'),
-  '%%TOTAL%%': String(ENGAGEMENTS.length),
+  '%%RECORDS%%': allRecords.map(renderRecord).join('\n'),
+  '%%TOTAL%%': String(allRecords.length),
 };
 for (const [key, value] of Object.entries(replacements)) {
   if (!html.includes(key)) throw new Error('Template missing marker ' + key);
@@ -94,5 +108,6 @@ await mkdir(dist, { recursive: true });
 await writeFile(resolve(dist, 'index.html'), html);
 await writeFile(resolve(dist, 'LICENSE.txt'), license);
 await writeFile(resolve(dist, '.nojekyll'), '');
-console.log('Preview generated:', ENGAGEMENTS.length, 'research records,',
-  verifiedEngagements(ENGAGEMENTS).length, 'verified');
+console.log('Preview generated:', allRecords.length, 'research records;',
+  merged.machineCandidates, 'new Meno candidates;',
+  verifiedEngagements(allRecords).length, 'verified');
