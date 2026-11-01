@@ -35,6 +35,14 @@
       "token": "προδίκῳ",
       "reference": "https://plato.johnhboyer.com/Theaetetus/book/1/?loc=151b",
       "reason": "Socrates names Prodicus as an alternative teacher; Burnet's Greek has a lowercase initial"
+    },
+    {
+      "id": "melissus",
+      "work": "Theaetetus",
+      "section": "183e",
+      "token": "μέλισσον",
+      "reference": "https://adfonteslibrary.org/work-plato-theaetetus",
+      "reason": "Socrates explicitly names Melissus in the lowercase accusative at 183e; the context contrasts him with Parmenides."
     }
   ],
   "documented_positive": [
@@ -115,6 +123,13 @@
       "reference": "https://adfonteslibrary.org/work-plato-protagoras",
       "reason": "Plato includes the Athenian lawgiver Solon in his list of Seven Sages.",
       "scope": "Only this passage checked"
+    },
+    {
+      "id": "melissus",
+      "work": "Theaetetus",
+      "section": "183e",
+      "reference": "https://adfonteslibrary.org/work-plato-theaetetus",
+      "reason": "Socrates names Melissus explicitly as the exponent of the One; lowercase personal-name token μέλισσον."
     }
   ],
   "full_lowercase_name_ids": [
@@ -144,9 +159,20 @@
     },
     {
       "id": "melissus",
-      "status": "plural reference unresolved",
-      "reference": "https://plato.johnhboyer.com/Theaetetus/book/1/?loc=180e",
-      "note": "Theaetetus 180e contains a pluralized reference; the direct-name concordance intentionally does not convert it into a singular Melissus match."
+      "status": "collective plural at 180e; singular name at 183e",
+      "reference": "https://adfonteslibrary.org/work-plato-theaetetus",
+      "note": "Theaetetus 180e uses a rhetorical plural Μέλισσοί ('Melissuses') for members of the Eleatic camp. The unambiguous singular name μέλισσον appears again at 183e. Both are indexed, but the plural reference is flagged as collective and is not an independent second individual."
+    }
+  ],
+  "collective_name_forms": [
+    {
+      "id": "melissus",
+      "work": "Theaetetus",
+      "section": "180e",
+      "token": "Μέλισσοί",
+      "kind": "collective_plural",
+      "reference": "https://assets.cambridge.org/97811084/16337/excerpt/9781108416337_excerpt.pdf",
+      "note": "Scholarship interprets this as a pluralized reference to Melissus and those of his school, not a separate philosopher called 'Melissuses'."
     }
   ]
 }
