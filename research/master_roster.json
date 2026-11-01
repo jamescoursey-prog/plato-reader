@@ -110,10 +110,11 @@
         "Μέλισσος",
         "Μέλισσον",
         "Μελίσσου",
-        "Μελίσσῳ"
+        "Μελίσσῳ",
+        "Μέλισσοί"
       ],
       "match": "accent_folded",
-      "review_flag": "identity_check"
+      "review_flag": "collective_plural_at_180e"
     },
     {
       "id": "empedocles",
