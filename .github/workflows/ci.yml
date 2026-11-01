@@ -148,3 +148,18 @@ jobs:
         with:
           name: meno-explicit-name-candidates
           path: ${{ runner.temp }}/meno-candidates.json
+      - name: Download pinned Theaetetus Greek (temporary)
+        run: |
+          curl --fail --location --silent --show-error --retry 3 \
+            'https://raw.githubusercontent.com/PerseusDL/canonical-greekLit/a6eb0cc3e6f6e382934a2c8b33577d2fb4371e00/data/tlg0059/tlg006/tlg0059.tlg006.perseus-grc2.xml' \
+            -o "${RUNNER_TEMP}/theaetetus.xml"
+      - name: Compare Theaetetus scan with the audited passage inventory
+        run: |
+          python -m research.theaetetus_name_scan "${RUNNER_TEMP}/theaetetus.xml" \
+            --expected research/theaetetus_expected.json \
+            --output "${RUNNER_TEMP}/theaetetus-candidates.json"
+      - name: Save derived Theaetetus metadata only
+        uses: actions/upload-artifact@v4
+        with:
+          name: theaetetus-explicit-name-candidates
+          path: ${{ runner.temp }}/theaetetus-candidates.json

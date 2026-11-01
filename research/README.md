@@ -104,3 +104,24 @@ Candidate identities must already be registered in the app's canonical
 section + thinker ID. The checked *Meno* 76c–d record wins over the
 automated match and retains its reviewer/source notes. No automatic
 candidate is marked `text_checked` or `verified`.
+
+## Second dialogue: Theaetetus (new scanner trial)
+
+Theaetetus uses the same TEI/Stephanus parsing functions as the Meno
+scanner, with a separate lexicon audited against the Greek text.
+See `research/theaetetus_name_scan.py` and
+`research/theaetetus_expected.json`. It tracks ten candidate intellectual
+figures across 343 Stephanus-letter sections (142a–210d), checking
+capitalized names and inflections but **not** indirect allusions.
+
+The program distinguishes words such as *Πρωταγόρειος* (Protagorean)
+from direct references to Protagoras, the plural *Παρμενίδαι* from
+the individual Parmenides, and lowercase *μέλισσον* (bee) from
+the pluralized philosopher-name reference *Μέλισσοί* (180e).
+This final item is a **research candidate**, not an established
+historical attribution. Both scripts report all unclassified capitalized
+tokens and fail if any appear in a new source revision.
+
+The results currently run in CI as a separate report so the
+identification audit can be assessed before importing them into
+the public concordance. They are not automatically verified records.
