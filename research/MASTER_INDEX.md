@@ -82,3 +82,36 @@ reference remains deliberately outside our singular-name index.
 
 No full Greek text is republished and the three-dialogue reviewed
 pilot remains unaffected.
+
+## Closing historical-identity audit
+
+The agreed 31-person roster has now undergone a **name-level ambiguity
+risk screen**. Its entire matrix, one representative cited passage
+per person, and explicit caution classification are in
+`roster_identity_triage.json`. This is bounded by the current starter
+roster and a frozen 26-dialogue selection, not an exhaustive survey of
+all Plato scholarship. The two false Euthydemus identifications remain
+excluded. No other individual passage has been promoted merely
+because its name matches a roster form.
+
+A previously missed direct explicit reference to Melissus occurs in
+`Theaetetus` 183e (Greek lowercase `μέλισσον`), alongside the
+collective plural `Μέλισσοί` at 180e. The former receives its own
+documented passage check; the latter is expressly labeled a
+collective reference, consistent with the Cambridge scholarly
+discussion (Cambridge University Press,
+https://assets.cambridge.org/97811084/16337/excerpt/9781108416337_excerpt.pdf).
+The earlier statement that Melissus had no named appearance was wrong.
+
+For the release review, every citation now constructs an explicit
+reader URL, with the correct book number for the Republic's ten
+distinct books. A separate route test checks all ten starting pages.
+The CSV includes the same navigational URL and review status.
+The 31-person risk triage, 11 checked positives, and 2 excluded
+Euthydemus namesakes are independent from machine lexical totals.
+The present expected totals are 31 people with occurrences,
+861 person-section records and 1,056 name tokens.
+
+No further historical-identity audit is a release blocker unless
+evidence of a systematic error appears; non-exhaustive inflections and
+uncertain historicity remain disclosed limitations.
