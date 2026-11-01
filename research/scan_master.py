@@ -147,6 +147,11 @@ def main():
     for w in report["sources"]:
         print(f"  {w['order']:02} {w['work']}: {w['sections_scanned']} sections, "
               f"{w['name_occurrences']} name tokens ({w['first_section']}–{w['last_section']})")
+    print("Seed roster, sorted by the defined category/name sequence:")
+    for item in report["people"]:
+        print(f"  {item['name']}: {item['sections']} cited sections in "
+              f"{item['dialogues']} works ({item['occurrences']} word occurrences)"
+              + (f"; flag={item['review_flag']}" if item['review_flag'] else ""))
 
 if __name__=="__main__":
     main()
