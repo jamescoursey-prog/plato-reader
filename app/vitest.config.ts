@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 
@@ -8,6 +9,10 @@ export default defineConfig({
   // "mount(...) is not available on the server".
   resolve: {
     conditions: ['browser'],
+    // Match the alias used by app/astro.config.mjs for the shared reader code.
+    alias: {
+      '@shared': fileURLToPath(new URL('../shared', import.meta.url)),
+    },
   },
   test: {
     environment: 'happy-dom',
