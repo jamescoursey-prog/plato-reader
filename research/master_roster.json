@@ -16,7 +16,8 @@
         "Θαλῆν",
         "Θαλῆτος",
         "Θαλῆτι",
-        "Θαλῆ"
+        "Θαλῆ",
+        "Θάλεώ"
       ],
       "match": "accent_folded",
       "review_flag": "identity_check"
@@ -228,7 +229,7 @@
         "Εὐθύδημόν"
       ],
       "match": "accent_folded",
-      "review_flag": "identity_check"
+      "review_flag": "identity_and_historicity_debated"
     },
     {
       "id": "dionysodorus",
@@ -241,7 +242,7 @@
         "Διονυσοδώρῳ"
       ],
       "match": "accent_folded",
-      "review_flag": null
+      "review_flag": "historicity_debated"
     },
     {
       "id": "polus",
