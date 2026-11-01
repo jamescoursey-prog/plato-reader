@@ -52,6 +52,8 @@ export const THINKERS: readonly Thinker[] = [
   { id: 'thales', name: 'Thales', greekName: 'Θαλῆς', historicalConfidence: 'secure' },
   { id: 'melissus', name: 'Melissus', greekName: 'Μέλισσος', historicalConfidence: 'secure' },
   { id: 'hesiod', name: 'Hesiod', greekName: 'Ἡσίοδος', historicalConfidence: 'secure' },
+  { id: 'zeno', name: 'Zeno of Elea', greekName: 'Ζήνων', historicalConfidence: 'secure' },
+  { id: 'xenophanes', name: 'Xenophanes', greekName: 'Ξενοφάνης', historicalConfidence: 'secure' },
 ];
 
 export const ENGAGEMENTS: readonly Engagement[] = [
