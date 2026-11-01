@@ -67,6 +67,10 @@ def scan_corpus(corpus: dict, roster: dict, sources: Path) -> dict:
         (r["id"], r["work"], r["section"], fold(r["token"])): r
         for r in identity_review["allowed_lowercase"]
     }
+    collective_names = {
+        (r["id"],r["work"],r["section"]):r
+        for r in identity_review.get("collective_name_forms",[])
+    }
     # This name's exact Greek forms were cross-checked against the
     # reader's independent morphological lexicon (57 occurrences in
     # 13 works, of which one work is outside this 26-dialogue scope).
@@ -139,7 +143,8 @@ def scan_corpus(corpus: dict, roster: dict, sources: Path) -> dict:
         {"person_id":person, "work":work, "section":section,
          "occurrences":details["occurrences"],
          "tokens":sorted(set(details["tokens"])),
-         "review_flag":known[person]["review_flag"] or "candidate"}
+         "review_flag":("collective_plural" if (person,work,section) in collective_names
+                        else known[person]["review_flag"] or "candidate")}
         for (person,work,section),details in by_person_section.items()
     ]
     matches.sort(key=lambda m:(known[m["person_id"]]["group"],
@@ -167,6 +172,9 @@ def scan_corpus(corpus: dict, roster: dict, sources: Path) -> dict:
     # unreviewed, even when they are adjacent in the same dialogue.
     observed = {(m["person_id"], m["work"], m["section"]) for m in matches}
     checked = identity_review["documented_positive"]
+    if canonical_corpus and not set(collective_names).issubset(observed):
+        raise ValueError("Collective plural name reference missing from Greek source: "+
+                         str(set(collective_names)-observed))
     checked_keys = {(item["id"],item["work"],item["section"]) for item in checked}
     if canonical_corpus and not checked_keys.issubset(observed):
         raise ValueError("Documented positive identity citation is missing: "+
@@ -204,6 +212,12 @@ def scan_corpus(corpus: dict, roster: dict, sources: Path) -> dict:
         "sources":audits,"people":people,"matches":matches,
         "identity_exclusions":excluded_matches,
         "documented_identity_checks":checked_passages,
+        "collective_name_candidates":[
+            {"person_id":x["id"],"work":x["work"],"section":x["section"],
+             "note":x["note"],"reference":x["reference"]}
+            for x in collective_names.values()
+            if (x["id"],x["work"],x["section"]) in observed
+        ],
         "historicity_notes":historicity_notes,
         "lowercase_name_exceptions": [
             {"person_id":key[0],"work":key[1],"section":key[2],
