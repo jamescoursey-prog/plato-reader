@@ -9,14 +9,18 @@ import {
   verifiedEngagements, distinctIndexedThinkerCount,
 } from '../app/src/lib/thinker-concordance.ts';
 import { mergeCandidates } from './merge-candidates.mjs';
+import { importTheaetetus } from './theaetetus-import.mjs';
 
-if (process.argv.length !== 3) {
-  throw new Error('Usage: node --experimental-strip-types preview/build.mjs <audited-meno-candidates.json>');
+if (process.argv.length !== 4) {
+  throw new Error('Usage: node --experimental-strip-types preview/build.mjs <meno.json> <theaetetus.json>');
 }
-const report = JSON.parse(await readFile(process.argv[2], 'utf8'));
-const merged = mergeCandidates(report);
-const allRecords = merged.records;
-const allThinkers = merged.thinkers;
+const [meno, theaetetus] = await Promise.all(process.argv.slice(2)
+  .map(async path => JSON.parse(await readFile(path, 'utf8'))));
+const merged = mergeCandidates(meno);
+const newTheaetetusCandidates = importTheaetetus(theaetetus, merged.records, THINKERS);
+const allRecords = [...merged.records, ...newTheaetetusCandidates];
+const allThinkers = THINKERS.filter(person => allRecords.some(e => e.thinkerId === person.id));
+const automaticCount = merged.machineCandidates + newTheaetetusCandidates.length;
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, '..');
@@ -85,8 +89,10 @@ const replacements = {
   '%%INDEXED_THINKERS%%': String(distinctIndexedThinkerCount(allRecords)),
   '%%TEXT_CHECKED%%': String(allRecords.filter((e) => e.status === 'text_checked').length),
   '%%VERIFIED%%': String(verifiedEngagements(allRecords).length),
-  '%%AUTOMATED_CANDIDATES%%': String(merged.machineCandidates),
-  '%%SOURCE_ATTRIBUTION%%': escapeHtml(merged.source),
+  '%%AUTOMATED_CANDIDATES%%': String(automaticCount),
+  '%%SOURCE_LINKS%%': [meno, theaetetus].map(r =>
+    '<a href="' + escapeHtml(r.source_url) +
+    '" target="_blank" rel="noopener noreferrer">' + escapeHtml(r.work) + '</a>').join(' · '),
   '%%PILOT_WORKS%%': escapeHtml(PILOT_WORKS.join(' · ')),
   '%%RECORDS%%': allRecords.map(renderRecord).join('\n'),
   '%%TOTAL%%': String(allRecords.length),
@@ -109,5 +115,6 @@ await writeFile(resolve(dist, 'index.html'), html);
 await writeFile(resolve(dist, 'LICENSE.txt'), license);
 await writeFile(resolve(dist, '.nojekyll'), '');
 console.log('Preview generated:', allRecords.length, 'research records;',
-  merged.machineCandidates, 'new Meno candidates;',
+  merged.machineCandidates, 'Meno candidates,',
+  newTheaetetusCandidates.length, 'Theaetetus candidates;',
   verifiedEngagements(allRecords).length, 'verified');

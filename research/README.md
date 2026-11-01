@@ -125,3 +125,12 @@ tokens and fail if any appear in a new source revision.
 The results currently run in CI as a separate report so the
 identification audit can be assessed before importing them into
 the public concordance. They are not automatically verified records.
+
+## Automatic publication of both dialogue inventories
+
+The same preview generation used for the Meno now runs the separately audited
+Theaetetus scanner and merges its candidate references with curated records.
+The program avoids duplicate (dialogue, Stephanus section, person) keys and
+keeps previously recorded human statuses. The build has no persistent
+database and does not run in a visitor's browser; only source pointers,
+metadata and short proposed research notes appear in the HTML site.
