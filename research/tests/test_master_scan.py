@@ -23,6 +23,11 @@ class CorpusMasterScanTest(unittest.TestCase):
         self.assertFalse(any(w["title"]=="Laws" for w in CORPUS["works"]))
         self.assertEqual(CORPUS["works"][-1]["title"],"Critias")
         self.assertEqual(len(CORPUS["works"]),26)
+        self.assertIn("θαλεω",plain)  # Θάλεώ in Republic 600a
+        self.assertEqual(next(p for p in ROSTER["people"] if p["id"]=="euthydemus")["review_flag"],
+                         "identity_and_historicity_debated")
+        self.assertEqual(next(p for p in ROSTER["people"] if p["id"]=="dionysodorus")["review_flag"],
+                         "historicity_debated")
 
     def test_lexicon_only_matches_name_forms(self):
         # Here a tiny corpus replaces the 26-text inventory only to check
