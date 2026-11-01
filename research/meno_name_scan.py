@@ -83,3 +83,25 @@ def scan(tei_xml: bytes) -> dict:
     )
 
 
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("tei", type=Path)
+    parser.add_argument("--expected", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    report = scan(args.tei.read_bytes())
+    issues = compare(report, json.loads(args.expected.read_text(encoding="utf-8")))
+    for issue in issues:
+        print("AUDIT FAILURE:", issue)
+    print(f"Meno: {report['sections_scanned']} sections, "
+          f"{len(report['intellectual_identities'])} thinkers, "
+          f"{report['total_name_occurrences']} name tokens, "
+          f"{report['distinct_mentioned_sections']} cited sections")
+    if issues:
+        return 1
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
+    return 0
+
+if __name__ == "__main__":
+    raise SystemExit(main())

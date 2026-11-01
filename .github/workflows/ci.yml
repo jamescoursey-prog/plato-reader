@@ -131,7 +131,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Test the XML name-extraction code
+      - name: Test reusable Greek name scanner
         run: python -m unittest discover -s research/tests -p 'test_*.py'
       - name: Download pinned Perseus Greek Meno (temporary only)
         run: |
@@ -140,7 +140,7 @@ jobs:
             -o "${RUNNER_TEMP}/meno-grc.xml"
       - name: Scan Greek text and compare against audited baseline
         run: |
-          python research/meno_name_scan.py "${RUNNER_TEMP}/meno-grc.xml" \
+          python -m research.meno_name_scan "${RUNNER_TEMP}/meno-grc.xml" \
             --expected research/meno_expected.json \
             --output "${RUNNER_TEMP}/meno-candidates.json"
       - name: Save derived candidate metadata only
@@ -163,3 +163,18 @@ jobs:
         with:
           name: theaetetus-explicit-name-candidates
           path: ${{ runner.temp }}/theaetetus-candidates.json
+      - name: Download pinned Sophist Greek (temporary only)
+        run: |
+          curl --fail --location --silent --show-error --retry 3 \
+            'https://raw.githubusercontent.com/PerseusDL/canonical-greekLit/a6eb0cc3e6f6e382934a2c8b33577d2fb4371e00/data/tlg0059/tlg007/tlg0059.tlg007.perseus-grc2.xml' \
+            -o "${RUNNER_TEMP}/sophist.xml"
+      - name: Audit Sophist explicit-name inventory
+        run: |
+          python -m research.sophist_name_scan "${RUNNER_TEMP}/sophist.xml" \
+            --expected research/sophist_expected.json \
+            --output "${RUNNER_TEMP}/sophist-candidates.json"
+      - name: Archive Sophist candidate metadata only
+        uses: actions/upload-artifact@v4
+        with:
+          name: sophist-explicit-name-candidates
+          path: ${{ runner.temp }}/sophist-candidates.json

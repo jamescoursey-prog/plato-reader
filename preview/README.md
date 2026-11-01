@@ -1,28 +1,23 @@
-# Public research-index preview: Meno + Theaetetus
+# Three-dialogue preview and reusable scanner
 
-During deployment (not when a visitor opens the site), GitHub downloads
-two pinned Perseus Greek TEI files into a temporary working directory.
-Both scanner programs validate the data against per-dialogue name inventories.
-The build then merges their generated metadata with the independently curated
-records and publishes only index.html, LICENSE.txt and .nojekyll.
+A single Greek TEI parser and named-reference scanner is now shared by the
+*Meno*, *Theaetetus*, and *Sophist*, with separate dialogue-specific
+dictionaries of names and exclusions and independently audited Stephanus
+citation inventories.
 
-Run the same build as CI and GitHub Pages with:
+Build and test: `bash preview/build-with-meno.sh` from the repository
+root. The historical script name now runs all three dialogues.
 
-```sh
-bash preview/build-with-meno.sh
-```
+The *Sophist* scan identifies Parmenides, Zeno of Elea, Xenophanes, and
+Homer by name, ten occurrences in eight cited sections. The adjective
+describing Protagorean writings at 232d and the named traditions at 242d
+are excluded from **explicit individual-name** counts and remain
+candidates for later investigation of philosophical allusions.
 
-The original script name is retained for compatibility, although it now
-runs both dialogues.
+Expected preview: 74 records, 15 distinct people, 72 machine suggestions,
+1 human text-checked record, and 0 fully verified engagements.
+No existing scholarly status is promoted by the detector.
 
-The preview includes 64 distinct (dialogue, section, person) records, 13
-indexed people, 1 text-checked record, and 0 verified engagements:
-62 scanner candidates plus two existing research records. The human
-text check on *Meno* 76c-d takes precedence over the machine match;
-the earlier *Theaetetus* 152e candidate is also preserved. No machine
-candidate is automatically text-checked, and the plural name of Melissus
-at 180e remains an explicitly identified research ambiguity.
-
-The published page includes no original Greek passage, English translation
-or copyrighted TLG text. Source citations and the MIT upstream notice
-remain present. These inventories do not establish corpus completeness.
+Only index.html, LICENSE.txt, and .nojekyll are deployed: temporary Greek
+source texts, English translations, and intermediate JSON are not
+published. The index is prepared during GitHub deployment, not on visits.
