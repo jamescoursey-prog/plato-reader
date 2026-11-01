@@ -44,12 +44,12 @@ class CorpusMasterScanTest(unittest.TestCase):
             # The same XML is used under 26 unique fake dialogue titles.
             report=scan_corpus(c,ROSTER,path)
             self.assertEqual(report["works_scanned"],26)
-            self.assertEqual(report["name_occurrences"],26*4)
-            self.assertEqual(report["matched_sections"],26*4)
-            self.assertEqual(report["people_with_hits"],4)
+            self.assertEqual(report["name_occurrences"],26*5)
+            self.assertEqual(report["matched_sections"],26*5)
+            self.assertEqual(report["people_with_hits"],5)
             self.assertFalse(any(m["person_id"]=="protagoras" for m in report["matches"]))
-            self.assertFalse(any(m["person_id"]=="melissus" and
-                                 "Μέλισσοί" in m["tokens"] for m in report["matches"]))
+            self.assertTrue(any(m["person_id"]=="melissus" and
+                                "Μέλισσοί" in m["tokens"] for m in report["matches"]))
 
 
     def test_research_identity_exclusions_and_lowercase_name_exceptions(self):
@@ -68,15 +68,18 @@ class CorpusMasterScanTest(unittest.TestCase):
                 locus,word=fixture.get(title,("152e","Ἀγαθῶν ἀγαθῶν Ἡρακλειτείων"))
                 tlg="tlg"+str(i+1).zfill(3)
                 w.append({"order":i+1,"title":title,"tlg":tlg,"edition":"perseus-grc2"})
-                body=f'<TEI xmlns="http://www.tei-c.org/ns/1.0"><text><body><p><milestone unit="section" n="{locus}"/>{word}</p></body></text></TEI>'
+                additional = ('<milestone unit="section" n="183e"/>μέλισσον'
+                              if title=="Theaetetus" else '')
+                body=f'<TEI xmlns="http://www.tei-c.org/ns/1.0"><text><body><p><milestone unit="section" n="{locus}"/>{word}{additional}</p></body></text></TEI>'
                 (path/(tlg+".xml")).write_bytes(body.encode("utf-8"))
             corpus={"pinned_commit":CORPUS["pinned_commit"],"scope":CORPUS["scope"],"works":w}
             report=scan_corpus(corpus,ROSTER,path)
             self.assertEqual(len(report["identity_exclusions"]),2)
-            self.assertEqual(len(report["lowercase_name_exceptions"]),2)
+            self.assertEqual(len(report["lowercase_name_exceptions"]),3)
             by={(m["person_id"],m["work"],m["section"]) for m in report["matches"]}
             self.assertIn(("prodicus","Laches","197d"),by)
             self.assertIn(("prodicus","Theaetetus","151b"),by)
+            self.assertIn(("melissus","Theaetetus","183e"),by)
             self.assertIn(("euthydemus","Cratylus","386d"),by)
             self.assertNotIn(("euthydemus","Republic","328b"),by)
             self.assertNotIn(("euthydemus","Symposium","222b"),by)
