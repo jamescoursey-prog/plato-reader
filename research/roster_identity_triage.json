@@ -1,0 +1,261 @@
+{
+  "version": "1.0-rc",
+  "scope": "Roster-level identity risk triage, not an audit of every mention",
+  "method": "Review the context and homonym/historicity risks for one representative explicit-name passage per seeded individual, preserve independently documented passage-level checks separately.",
+  "entries": [
+    {
+      "id": "thales",
+      "example_work": "Republic",
+      "example_section": "600a",
+      "risk": "context_sensitive",
+      "note": "Several Thales references; the Milesian attribution is explicit at the sample location.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "pythagoras",
+      "example_work": "Republic",
+      "example_section": "600b",
+      "risk": "low",
+      "note": "Named as the originator of a distinct way of life; no competing Pythagoras inferred.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "philolaus",
+      "example_work": "Phaedo",
+      "example_section": "61d",
+      "risk": "low",
+      "note": "Named Pythagorean source in Socrates' discussion with Cebes and Simmias.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "xenophanes",
+      "example_work": "Sophist",
+      "example_section": "242d",
+      "risk": "low",
+      "note": "Named as the thinker associated with the Eleatic tradition.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "heraclitus",
+      "example_work": "Cratylus",
+      "example_section": "402a",
+      "risk": "low",
+      "note": "Named in discussion of the river/flux doctrine; do not count Heraclitean adjectives as names.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "parmenides",
+      "example_work": "Sophist",
+      "example_section": "216a",
+      "risk": "low",
+      "note": "Named alongside Zeno as the Eleatic teacher.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "zeno",
+      "example_work": "Sophist",
+      "example_section": "216a",
+      "risk": "context_sensitive",
+      "note": "Identified together with Parmenides; distinguish from other people called Zeno outside the selected passages.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "melissus",
+      "example_work": "Theaetetus",
+      "example_section": "183e",
+      "risk": "collective_usage",
+      "note": "183e names Melissus individually in lowercase; 180e refers to 'Melissuses' collectively.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "empedocles",
+      "example_work": "Meno",
+      "example_section": "76c",
+      "risk": "low",
+      "note": "Identified as the source for Socrates' effluence explanation.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "anaxagoras",
+      "example_work": "Apology",
+      "example_section": "26d",
+      "risk": "low",
+      "note": "Named philosopher associated with cosmology and the sun.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "protagoras",
+      "example_work": "Theaetetus",
+      "example_section": "152a",
+      "risk": "low",
+      "note": "Named author of the measure doctrine; adjectives are not counted as a personal name.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "gorgias",
+      "example_work": "Gorgias",
+      "example_section": "447a",
+      "risk": "context_sensitive",
+      "note": "Clearly the famous rhetorician in his eponymous dialogue; consider namesakes in other works by context.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "prodicus",
+      "example_work": "Laches",
+      "example_section": "197d",
+      "risk": "low",
+      "note": "Direct name in lowercase with explicit reference to the sophist; forms cross-checked.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "hippias",
+      "example_work": "Phaedrus",
+      "example_section": "267b",
+      "risk": "context_sensitive",
+      "note": "Plato specifies the Eleian visitor, identifying the sophist of Elis.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "thrasymachus",
+      "example_work": "Republic",
+      "example_section": "336b",
+      "risk": "low",
+      "note": "Named interlocutor of Socrates in the Republic; also named among rhetoricians elsewhere.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "euthydemus",
+      "example_work": "Cratylus",
+      "example_section": "386d",
+      "risk": "context_sensitive",
+      "note": "The sophist is named here; other Euthydemuses at Republic 328b and Symposium 222b are excluded.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "dionysodorus",
+      "example_work": "Euthydemus",
+      "example_section": "271b",
+      "risk": "historicity_caveat",
+      "note": "Brother of the sophist Euthydemus; independent historical attestation remains debated.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "polus",
+      "example_work": "Phaedrus",
+      "example_section": "267b",
+      "risk": "context_sensitive",
+      "note": "A rhetorician named with specific rhetorical devices; distinguish from the ordinary Greek word for a foal.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "evenus",
+      "example_work": "Apology",
+      "example_section": "20b",
+      "risk": "context_sensitive",
+      "note": "A Parian teacher is identified, but two Parian poets called Evenus complicate fragment attribution.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "homer",
+      "example_work": "Republic",
+      "example_section": "595b",
+      "risk": "historicity_caveat",
+      "note": "The epic poet is explicitly named; the historicity of a single author is a separate question.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "hesiod",
+      "example_work": "Republic",
+      "example_section": "377d",
+      "risk": "low",
+      "note": "Named epic poet; no competing identity in the sample passage.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "pindar",
+      "example_work": "Meno",
+      "example_section": "81b",
+      "risk": "low",
+      "note": "Named lyric poet; verse used in the argument about recollection.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "theognis",
+      "example_work": "Meno",
+      "example_section": "95d",
+      "risk": "low",
+      "note": "Named poet in a discussion of whether virtue is teachable.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "simonides",
+      "example_work": "Protagoras",
+      "example_section": "339a",
+      "risk": "context_sensitive",
+      "note": "Identified through the lyric poem being discussed; specifically Simonides of Ceos.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "aeschylus",
+      "example_work": "Symposium",
+      "example_section": "180a",
+      "risk": "low",
+      "note": "Named tragedian quoted by the speakers.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "sophocles",
+      "example_work": "Republic",
+      "example_section": "329b",
+      "risk": "low",
+      "note": "Named dramatist in Cephalus' recollection.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "euripides",
+      "example_work": "Phaedrus",
+      "example_section": "268c",
+      "risk": "low",
+      "note": "Named with Sophocles as a tragic poet.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "aristophanes",
+      "example_work": "Apology",
+      "example_section": "19c",
+      "risk": "context_sensitive",
+      "note": "Named author of the stage comedy featuring Socrates; same dramatist as in Symposium.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "agathon",
+      "example_work": "Protagoras",
+      "example_section": "315e",
+      "risk": "context_sensitive",
+      "note": "Young Agathon identified in modern scholarship as the later tragic poet of Symposium.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "epicharmus",
+      "example_work": "Theaetetus",
+      "example_section": "152e",
+      "risk": "low",
+      "note": "Named poet associated with philosophy of flux.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    },
+    {
+      "id": "solon",
+      "example_work": "Protagoras",
+      "example_section": "343a",
+      "risk": "context_sensitive",
+      "note": "Identified among Seven Sages as the Athenian lawgiver and poet.",
+      "scope": "roster-level risk screen; remaining occurrences provisional"
+    }
+  ],
+  "risk_labels": {
+    "low": "No specific homonym concern identified in sampled context",
+    "context_sensitive": "Possible namesake, word sense, or identity attribution needs context",
+    "historicity_caveat": "Distinguish named figure in Plato from independent historical existence",
+    "collective_usage": "Distinguish an individual's name from a collective plural"
+  }
+}
