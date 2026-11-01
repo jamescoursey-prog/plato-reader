@@ -33,4 +33,4 @@ node --experimental-strip-types preview/master-index.mjs "$TEMP/master.json"
 node --experimental-strip-types --test \
   preview/merge-candidates.test.mjs preview/theaetetus-import.test.mjs \
   preview/sophist-import.test.mjs preview/check.test.mjs \
-  preview/master-index.test.mjs
+  preview/master-index.test.mjs preview/reader-link.test.mjs
