@@ -1,0 +1,26 @@
+# Master-name discovery scan (26 works, 31-name seed roster)
+
+We deliberately scan **only a predefined list of intellectual figures** and
+only enumerated, exact Greek **personal-name inflections**. This prevents
+capturing ordinary uppercase words and epithets that happen to resemble
+historical names. It also creates *false negatives*: unlisted inflections,
+lowercase names, and unknown figures will not appear. We explicitly accept
+that tradeoff for a conservative first version.
+
+- `research/master_roster.json`: seed list of 31 names, accepted Greek forms
+  and ambiguity flags; not a fully verified Plato-specific prosopography.
+- `research/corpus_26.json`: the exact 26 agreed dialogues from *Apology*
+  through *Critias*, with pinned Perseus TEI filenames. *Laws* excluded.
+- `research/scan_master.py`: reusable exact-form name scan using shared TEI
+  and Stephanus parsing, exports metadata only.
+- `research/tests/test_master_scan.py`: tests designed to reject plural schools,
+  Protagorean/Heraclitean adjectives and the ordinary genitive *ἀγαθῶν*.
+
+Match status is **provisional**. A name appearing at a section does not yet
+prove that it refers to the intended historical individual. Particular
+identity ambiguity (e.g., a character with the same name as a sophist) is
+separately flagged. The two existing human research records remain unchanged.
+
+The first output is a *master person-to-passage index*, not an exhaustive
+intellectual engagement or doctrine index. We can refine accepted forms
+against Abbott, Nails, or textual editions after seeing the first report.
