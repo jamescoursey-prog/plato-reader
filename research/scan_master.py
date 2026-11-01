@@ -67,6 +67,10 @@ def scan_corpus(corpus: dict, roster: dict, sources: Path) -> dict:
         (r["id"], r["work"], r["section"], fold(r["token"])): r
         for r in identity_review["allowed_lowercase"]
     }
+    # This name's exact Greek forms were cross-checked against the
+    # reader's independent morphological lexicon (57 occurrences in
+    # 13 works, of which one work is outside this 26-dialogue scope).
+    lowercase_name_allowlist = set(identity_review["full_lowercase_name_ids"])
     if len(excluded_identity) != len(identity_review["excluded_identity"]) or (
         len(allowed_lowercase) != len(identity_review["allowed_lowercase"])
     ):
@@ -92,9 +96,10 @@ def scan_corpus(corpus: dict, roster: dict, sources: Path) -> dict:
                 context_key = (entry["id"], work["title"], locus)
                 if not token[0].isupper():
                     lower_key = (*context_key, fold(token))
-                    if lower_key not in allowed_lowercase:
+                    if lower_key not in allowed_lowercase and entry["id"] not in lowercase_name_allowlist:
                         continue
-                    lowercase_seen.add(lower_key)
+                    if lower_key in allowed_lowercase:
+                        lowercase_seen.add(lower_key)
                 if context_key in excluded_identity:
                     excluded_seen.add(context_key)
                     excluded_matches.append({
@@ -141,6 +146,22 @@ def scan_corpus(corpus: dict, roster: dict, sources: Path) -> dict:
                                known[m["person_id"]]["name"],
                                order[m["work"]],
                                int(m["section"][:-1]), m["section"][-1]))
+    # Known independent lexicon comparisons (same source tradition).
+    # These guard regressions; they are not claims of historical identity
+    # verification for the entire 31-person roster.
+    canonical_corpus = [w["title"] for w in works] == [
+        w["title"] for w in json.loads(
+            (Path(__file__).with_name("corpus_26.json")).read_text(encoding="utf-8")
+        )["works"]
+    ]
+    if canonical_corpus:
+        expected_names = {"empedocles":2, "euthydemus":71, "prodicus":56}
+        for person_id, expected in expected_names.items():
+            actual = sum(m["occurrences"] for m in matches
+                         if m["person_id"] == person_id)
+            if actual != expected:
+                raise ValueError(f"Cross-checked form inventory changed for {person_id}: "
+                                 f"{actual} rather than {expected}; review Greek forms")
     appearances = defaultdict(list)
     for match in matches:
         appearances[match["person_id"]].append(match)

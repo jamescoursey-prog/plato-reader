@@ -34,3 +34,22 @@ These are **unreviewed lexical candidates**, not previously text-checked
 pilot records. The previously published index is preserved at the website
 root. An unrecognized name inflection can lead to false negatives; identity
 flags are not silently converted into approvals.
+
+## Independent citation/name-form cross-check
+
+The reader's Greek word lexicon lists 73 occurrences of *Euthydemus*
+in four works; exactly 70 occur in the `Euthydemus` dialogue, one
+in `Cratylus` 386d, and two refer to distinct namesakes in
+`Republic` 328b and `Symposium` 222b. Our restricted index must
+retain only **71** occurrences of the sophist's name, not all 73.
+Citation evidence is saved in `research/identity_review.json`.
+
+Similarly, the reader's Prodicus lemma lists 57 occurrences in 13
+works, including *Theages*, which is beyond our chosen 26-dialogue
+corpus. After adding the missing vocative forms and safely accepting
+case-insensitive **exact forms for Prodicus only**, the restricted
+corpus should contain **56** lexical occurrences. Other names are
+not automatically made case insensitive. Regression checks in
+`research/scan_master.py` enforce both inventories and Empedocles' two
+explicit name tokens; these are limited, source-dependent checks,
+not blanket scholarly verification.

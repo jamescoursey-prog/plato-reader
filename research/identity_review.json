@@ -52,5 +52,9 @@
       "reference": "https://academic.oup.com/edited-volume/61673/chapter-abstract/548066461",
       "reason": "Oxford Classical Dictionary explicitly identifies the boy Agathon of Protagoras with the tragedian"
     }
-  ]
+  ],
+  "full_lowercase_name_ids": [
+    "prodicus"
+  ],
+  "evidence_for_lowercase_policy": "https://plato.johnhboyer.com/lemma/prodikos/ — 57 tokens, 13 works; excluding Theages yields 56 tokens expected in the project's 26 texts. Other names remain capitalization-restricted."
 }
