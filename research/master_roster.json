@@ -1,0 +1,422 @@
+{
+  "version": "0.1",
+  "purpose": "Provisional named-figure concordance; only explicit proper-name matches, no inferred engagements",
+  "sources": [
+    "Evelyn Abbott, A Subject-Index to the Dialogues of Plato (1875), for subsequent cross-check",
+    "Debra Nails, The People of Plato (2002), for identity disambiguation",
+    "Diels-Kranz and Laks-Most for Presocratic identifications"
+  ],
+  "people": [
+    {
+      "id": "thales",
+      "name": "Thales of Miletus",
+      "group": "presocratic",
+      "forms": [
+        "Θαλῆς",
+        "Θαλῆν",
+        "Θαλῆτος",
+        "Θαλῆτι",
+        "Θαλῆ"
+      ],
+      "match": "accent_folded",
+      "review_flag": "identity_check"
+    },
+    {
+      "id": "pythagoras",
+      "name": "Pythagoras",
+      "group": "presocratic",
+      "forms": [
+        "Πυθαγόρας",
+        "Πυθαγόρου",
+        "Πυθαγόραν",
+        "Πυθαγόρᾳ",
+        "Πυθαγόρα"
+      ],
+      "match": "accent_folded",
+      "review_flag": null
+    },
+    {
+      "id": "philolaus",
+      "name": "Philolaus",
+      "group": "presocratic",
+      "forms": [
+        "Φιλόλαος",
+        "Φιλολάου",
+        "Φιλόλαον",
+        "Φιλολάῳ"
+      ],
+      "match": "accent_folded",
+      "review_flag": null
+    },
+    {
+      "id": "xenophanes",
+      "name": "Xenophanes",
+      "group": "presocratic",
+      "forms": [
+        "Ξενοφάνης",
+        "Ξενοφάνους",
+        "Ξενοφάνην",
+        "Ξενοφάνει"
+      ],
+      "match": "accent_folded",
+      "review_flag": null
+    },
+    {
+      "id": "heraclitus",
+      "name": "Heraclitus",
+      "group": "presocratic",
+      "forms": [
+        "Ἡράκλειτος",
+        "Ἡρακλείτου",
+        "Ἡράκλειτον",
+        "Ἡρακλείτῳ"
+      ],
+      "match": "accent_folded",
+      "review_flag": null
+    },
+    {
+      "id": "parmenides",
+      "name": "Parmenides",
+      "group": "presocratic",
+      "forms": [
+        "Παρμενίδης",
+        "Παρμενίδου",
+        "Παρμενίδην",
+        "Παρμενίδῃ"
+      ],
+      "match": "accent_folded",
+      "review_flag": null
+    },
+    {
+      "id": "zeno",
+      "name": "Zeno of Elea",
+      "group": "presocratic",
+      "forms": [
+        "Ζήνων",
+        "Ζήνωνα",
+        "Ζήνωνος",
+        "Ζήνωνι",
+        "Ζήνωνά"
+      ],
+      "match": "accent_folded",
+      "review_flag": "identity_check"
+    },
+    {
+      "id": "melissus",
+      "name": "Melissus of Samos",
+      "group": "presocratic",
+      "forms": [
+        "Μέλισσος",
+        "Μέλισσον",
+        "Μελίσσου",
+        "Μελίσσῳ"
+      ],
+      "match": "accent_folded",
+      "review_flag": "identity_check"
+    },
+    {
+      "id": "empedocles",
+      "name": "Empedocles",
+      "group": "presocratic",
+      "forms": [
+        "Ἐμπεδοκλῆς",
+        "Ἐμπεδοκλέα",
+        "Ἐμπεδοκλέους",
+        "Ἐμπεδοκλεῖ"
+      ],
+      "match": "accent_folded",
+      "review_flag": null
+    },
+    {
+      "id": "anaxagoras",
+      "name": "Anaxagoras",
+      "group": "presocratic",
+      "forms": [
+        "Ἀναξαγόρας",
+        "Ἀναξαγόρου",
+        "Ἀναξαγόραν",
+        "Ἀναξαγόρᾳ",
+        "Ἀναξαγόρα"
+      ],
+      "match": "accent_folded",
+      "review_flag": null
+    },
+    {
+      "id": "protagoras",
+      "name": "Protagoras",
+      "group": "sophist",
+      "forms": [
+        "Πρωταγόρας",
+        "Πρωταγόρου",
+        "Πρωταγόραν",
+        "Πρωταγόρᾳ",
+        "Πρωταγόρα"
+      ],
+      "match": "accent_folded",
+      "review_flag": null
+    },
+    {
+      "id": "gorgias",
+      "name": "Gorgias",
+      "group": "sophist",
+      "forms": [
+        "Γοργίας",
+        "Γοργίου",
+        "Γοργίαν",
+        "Γοργίᾳ",
+        "Γοργία"
+      ],
+      "match": "accent_folded",
+      "review_flag": "identity_check"
+    },
+    {
+      "id": "prodicus",
+      "name": "Prodicus",
+      "group": "sophist",
+      "forms": [
+        "Πρόδικος",
+        "Προδίκου",
+        "Πρόδικον",
+        "Προδίκῳ"
+      ],
+      "match": "accent_folded",
+      "review_flag": null
+    },
+    {
+      "id": "hippias",
+      "name": "Hippias of Elis",
+      "group": "sophist",
+      "forms": [
+        "Ἱππίας",
+        "Ἱππίου",
+        "Ἱππίαν",
+        "Ἱππίᾳ",
+        "Ἱππία"
+      ],
+      "match": "accent_folded",
+      "review_flag": "identity_check"
+    },
+    {
+      "id": "thrasymachus",
+      "name": "Thrasymachus",
+      "group": "sophist",
+      "forms": [
+        "Θρασύμαχος",
+        "Θρασυμάχου",
+        "Θρασύμαχον",
+        "Θρασυμάχῳ"
+      ],
+      "match": "accent_folded",
+      "review_flag": null
+    },
+    {
+      "id": "euthydemus",
+      "name": "Euthydemus of Chios",
+      "group": "sophist",
+      "forms": [
+        "Εὐθύδημος",
+        "Εὐθυδήμου",
+        "Εὐθύδημον",
+        "Εὐθυδήμῳ"
+      ],
+      "match": "accent_folded",
+      "review_flag": "identity_check"
+    },
+    {
+      "id": "dionysodorus",
+      "name": "Dionysodorus",
+      "group": "sophist",
+      "forms": [
+        "Διονυσόδωρος",
+        "Διονυσοδώρου",
+        "Διονυσόδωρον",
+        "Διονυσοδώρῳ"
+      ],
+      "match": "accent_folded",
+      "review_flag": null
+    },
+    {
+      "id": "polus",
+      "name": "Polus of Acragas",
+      "group": "sophist",
+      "forms": [
+        "Πῶλος",
+        "Πώλου",
+        "Πῶλον",
+        "Πώλῳ"
+      ],
+      "match": "accent_folded",
+      "review_flag": "identity_check"
+    },
+    {
+      "id": "evenus",
+      "name": "Evenus of Paros",
+      "group": "sophist",
+      "forms": [
+        "Εὔηνος",
+        "Εὐήνου",
+        "Εὔηνον",
+        "Εὐήνῳ"
+      ],
+      "match": "accent_folded",
+      "review_flag": "identity_check"
+    },
+    {
+      "id": "homer",
+      "name": "Homer",
+      "group": "poet",
+      "forms": [
+        "Ὅμηρος",
+        "Ὁμήρου",
+        "Ὅμηρον",
+        "Ὁμήρῳ"
+      ],
+      "match": "accent_folded",
+      "review_flag": "historicity_disputed"
+    },
+    {
+      "id": "hesiod",
+      "name": "Hesiod",
+      "group": "poet",
+      "forms": [
+        "Ἡσίοδος",
+        "Ἡσιόδου",
+        "Ἡσίοδον",
+        "Ἡσιόδῳ"
+      ],
+      "match": "accent_folded",
+      "review_flag": null
+    },
+    {
+      "id": "pindar",
+      "name": "Pindar",
+      "group": "poet",
+      "forms": [
+        "Πίνδαρος",
+        "Πινδάρου",
+        "Πίνδαρον",
+        "Πινδάρῳ"
+      ],
+      "match": "accent_folded",
+      "review_flag": null
+    },
+    {
+      "id": "theognis",
+      "name": "Theognis",
+      "group": "poet",
+      "forms": [
+        "Θέογνις",
+        "Θέογνιν",
+        "Θεόγνιδος",
+        "Θεόγνιδι",
+        "Θεόγνι"
+      ],
+      "match": "accent_folded",
+      "review_flag": null
+    },
+    {
+      "id": "simonides",
+      "name": "Simonides of Ceos",
+      "group": "poet",
+      "forms": [
+        "Σιμωνίδης",
+        "Σιμωνίδου",
+        "Σιμωνίδην",
+        "Σιμωνίδῃ"
+      ],
+      "match": "accent_folded",
+      "review_flag": "identity_check"
+    },
+    {
+      "id": "aeschylus",
+      "name": "Aeschylus",
+      "group": "poet",
+      "forms": [
+        "Αἰσχύλος",
+        "Αἰσχύλου",
+        "Αἰσχύλον",
+        "Αἰσχύλῳ"
+      ],
+      "match": "accent_folded",
+      "review_flag": null
+    },
+    {
+      "id": "sophocles",
+      "name": "Sophocles",
+      "group": "poet",
+      "forms": [
+        "Σοφοκλῆς",
+        "Σοφοκλέα",
+        "Σοφοκλέους",
+        "Σοφοκλεῖ"
+      ],
+      "match": "accent_folded",
+      "review_flag": null
+    },
+    {
+      "id": "euripides",
+      "name": "Euripides",
+      "group": "poet",
+      "forms": [
+        "Εὐριπίδης",
+        "Εὐριπίδου",
+        "Εὐριπίδην",
+        "Εὐριπίδῃ"
+      ],
+      "match": "accent_folded",
+      "review_flag": null
+    },
+    {
+      "id": "aristophanes",
+      "name": "Aristophanes",
+      "group": "poet",
+      "forms": [
+        "Ἀριστοφάνης",
+        "Ἀριστοφάνους",
+        "Ἀριστοφάνην",
+        "Ἀριστοφάνει"
+      ],
+      "match": "accent_folded",
+      "review_flag": "identity_check"
+    },
+    {
+      "id": "agathon",
+      "name": "Agathon",
+      "group": "poet",
+      "forms": [
+        "Ἀγάθων",
+        "Ἀγάθωνα",
+        "Ἀγάθωνος",
+        "Ἀγάθωνι"
+      ],
+      "match": "accent_sensitive",
+      "review_flag": "identity_check"
+    },
+    {
+      "id": "epicharmus",
+      "name": "Epicharmus",
+      "group": "poet",
+      "forms": [
+        "Ἐπίχαρμος",
+        "Ἐπιχάρμου",
+        "Ἐπίχαρμον",
+        "Ἐπιχάρμῳ"
+      ],
+      "match": "accent_folded",
+      "review_flag": null
+    },
+    {
+      "id": "solon",
+      "name": "Solon",
+      "group": "poet",
+      "forms": [
+        "Σόλων",
+        "Σόλωνα",
+        "Σόλωνος",
+        "Σόλωνι"
+      ],
+      "match": "accent_folded",
+      "review_flag": "identity_check"
+    }
+  ]
+}
