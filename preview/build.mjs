@@ -9,18 +9,20 @@ import {
   verifiedEngagements, distinctIndexedThinkerCount,
 } from '../app/src/lib/thinker-concordance.ts';
 import { mergeCandidates } from './merge-candidates.mjs';
-import { importTheaetetus } from './theaetetus-import.mjs';
+import { importAuditedDialogue } from './theaetetus-import.mjs';
 
-if (process.argv.length !== 4) {
-  throw new Error('Usage: node --experimental-strip-types preview/build.mjs <meno.json> <theaetetus.json>');
+if (process.argv.length !== 5) {
+  throw new Error('Usage: node --experimental-strip-types preview/build.mjs <meno.json> <theaetetus.json> <sophist.json>');
 }
-const [meno, theaetetus] = await Promise.all(process.argv.slice(2)
+const [meno, theaetetus, sophist] = await Promise.all(process.argv.slice(2)
   .map(async path => JSON.parse(await readFile(path, 'utf8'))));
 const merged = mergeCandidates(meno);
-const newTheaetetusCandidates = importTheaetetus(theaetetus, merged.records, THINKERS);
-const allRecords = [...merged.records, ...newTheaetetusCandidates];
+const newTheaetetusCandidates = importAuditedDialogue(theaetetus, merged.records, THINKERS);
+const firstTwo = [...merged.records, ...newTheaetetusCandidates];
+const newSophistCandidates = importAuditedDialogue(sophist, firstTwo, THINKERS);
+const allRecords = [...firstTwo, ...newSophistCandidates];
 const allThinkers = THINKERS.filter(person => allRecords.some(e => e.thinkerId === person.id));
-const automaticCount = merged.machineCandidates + newTheaetetusCandidates.length;
+const automaticCount = merged.machineCandidates + newTheaetetusCandidates.length + newSophistCandidates.length;
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, '..');
@@ -90,7 +92,7 @@ const replacements = {
   '%%TEXT_CHECKED%%': String(allRecords.filter((e) => e.status === 'text_checked').length),
   '%%VERIFIED%%': String(verifiedEngagements(allRecords).length),
   '%%AUTOMATED_CANDIDATES%%': String(automaticCount),
-  '%%SOURCE_LINKS%%': [meno, theaetetus].map(r =>
+  '%%SOURCE_LINKS%%': [meno, theaetetus, sophist].map(r =>
     '<a href="' + escapeHtml(r.source_url) +
     '" target="_blank" rel="noopener noreferrer">' + escapeHtml(r.work) + '</a>').join(' · '),
   '%%PILOT_WORKS%%': escapeHtml(PILOT_WORKS.join(' · ')),
@@ -117,4 +119,5 @@ await writeFile(resolve(dist, '.nojekyll'), '');
 console.log('Preview generated:', allRecords.length, 'research records;',
   merged.machineCandidates, 'Meno candidates,',
   newTheaetetusCandidates.length, 'Theaetetus candidates;',
+  newSophistCandidates.length, 'Sophist candidates;',
   verifiedEngagements(allRecords).length, 'verified');
