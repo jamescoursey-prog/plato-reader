@@ -70,7 +70,7 @@ EXCLUDE = {
         "Oceanus": ("ωκεαν",),
         "Tethys": ("τηθυ",),
         "Antaeus": ("ανται",),
-        "Heracles": ("ηρακλε",),
+        "Heracles": ("ηρακλεα", "ηρακλεε"),
         "Theseus": ("θησε",),
         "Sciron": ("σκιρων",),
         "Amphitryon": ("αμφιτρυων",),
