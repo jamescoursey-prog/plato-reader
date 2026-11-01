@@ -33,28 +33,47 @@ This is a build-time research mechanism, **not a user-initiated website
 database rebuild**. The published master index does not overwrite or
 promote the original manually assessed entries.
 
-## November 1 identity and morphology audit
+## Identity audits and Version 1.0 release candidate
 
-The 31-name roster across the 26 project dialogues now produces **858
-provisional person–section references** (1,053 Greek word matches).
-This replaces the preliminary 829/1,006 count.
+The current 31-name inventory covers **26 selected dialogues**, produces
+**861 person–section records** and **1,056 Greek name tokens**, and has
+matches for **all 31 roster members**. Counts describe lexical and
+person–passage *candidates*, not 861 independently certified identities.
 
-There are two **confirmed excluded homonyms**, documented in
-`research/identity_review.json`: `Republic` 328b is Euthydemus
-son of Cephalus, and `Symposium` 222b is Euthydemus son of Diocles,
-neither the sophist Euthydemus of Chios. `Cratylus` 386d remains
-appropriately attributed to the sophist. The reader's Greek lemma
-inventory for Euthydemus reconciles to 71 occurrences in our index
-(70 in `Euthydemus`, one in `Cratylus`).
+The final roster-level identity triage is documented in
+`research/roster_identity_triage.json` (31/31 names). Of these,
+17 have no identified ambiguity in the sampled context,
+11 require namesake/context checks, one has a collective-plural
+usage (Melissus), and two have separate historicity concerns.
+It is a risk screen, **not a review of every mention**.
 
-The roster now includes attested vocatives of Euthydemus and Prodicus.
-The standalone identity audit verifies lowercase Prodicus in `Laches`
-197d and `Theaetetus` 151b; against the reader's lexical inventory,
-56 Prodicus occurrences belong to this 26-dialogue selection
-(the 57th is in `Theages`, which is beyond scope). Regression guards
-reject unexpected changes to these cross-checked totals.
+In `research/identity_review.json`, **11 particular identities**
+have separately documented passage checks. Two known homonymous
+Euthydemuses (Republic 328b and Symposium 222b) are explicitly
+excluded. `Cratylus` 386d retains Euthydemus of Chios.
+The scanner includes the vocatives of Euthydemus and Prodicus
+and only permits lowercase forms when explicitly justified.
+The independent lexicon guard expects 71 Euthydemus and 56 Prodicus
+name tokens in this exact corpus.
 
-The above is **not** certification of 858 unique historical identities.
-Most entries remain lexical candidates; the interface reports the
-two specific excluded namesake cases. We have not automatically
-promoted every candidate to scholarly-verified.
+Melissus is now included at `Theaetetus` **183e**, where Plato
+uses a lowercase accusative of his personal name, and **180e**,
+where the rhetorical plural *Melissuses* refers to the philosopher
+and his school collectively. The latter remains flagged and
+is not treated as another individual. The source and scholarly
+interpretation are recorded in the identity-review JSON.
+
+The 10-book `Republic` is now linked to the **correct book route**
+for each Stephanus page rather than incorrectly sending all
+citations to Book I. The CSV exports that full reader URL and
+an explicit review-status field.
+
+For both the published page and CSV, the build script scans the
+pinned Perseus texts and runs tests, without republishing Greek
+source texts or copyrighted translations. The original 3-dialogue
+passage research preview and its review statuses remain unchanged.
+
+The public Pages build is deliberately a **release candidate on the
+feature branch**. No main-branch merge, release tag, or automatic
+claim of universal verification is implied.
+
