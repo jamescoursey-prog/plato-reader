@@ -1,0 +1,190 @@
+{
+  "version": "0.1",
+  "scope": "The project's 26 dialogue entries 1–26, Apology to Critias; no Laws or later works",
+  "perseus_repo": "PerseusDL/canonical-greekLit",
+  "pinned_commit": "a6eb0cc3e6f6e382934a2c8b33577d2fb4371e00",
+  "works": [
+    {
+      "order": 1,
+      "title": "Apology",
+      "reader_slug": "Apology",
+      "tlg": "tlg002",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 2,
+      "title": "Euthyphro",
+      "reader_slug": "Euthyphro",
+      "tlg": "tlg001",
+      "edition": "perseus-grc1"
+    },
+    {
+      "order": 3,
+      "title": "Crito",
+      "reader_slug": "Crito",
+      "tlg": "tlg003",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 4,
+      "title": "Laches",
+      "reader_slug": "Laches",
+      "tlg": "tlg019",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 5,
+      "title": "Charmides",
+      "reader_slug": "Charmides",
+      "tlg": "tlg018",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 6,
+      "title": "Lysis",
+      "reader_slug": "Lysis",
+      "tlg": "tlg020",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 7,
+      "title": "Ion",
+      "reader_slug": "Ion",
+      "tlg": "tlg027",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 8,
+      "title": "HippiasMinor",
+      "reader_slug": "HippiasMinor",
+      "tlg": "tlg026",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 9,
+      "title": "HippiasMajor",
+      "reader_slug": "HippiasMajor",
+      "tlg": "tlg025",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 10,
+      "title": "Euthydemus",
+      "reader_slug": "Euthydemus",
+      "tlg": "tlg021",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 11,
+      "title": "Protagoras",
+      "reader_slug": "Protagoras",
+      "tlg": "tlg022",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 12,
+      "title": "Gorgias",
+      "reader_slug": "Gorgias",
+      "tlg": "tlg023",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 13,
+      "title": "Meno",
+      "reader_slug": "Meno",
+      "tlg": "tlg024",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 14,
+      "title": "Menexenus",
+      "reader_slug": "Menexenus",
+      "tlg": "tlg028",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 15,
+      "title": "Phaedo",
+      "reader_slug": "Phaedo",
+      "tlg": "tlg004",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 16,
+      "title": "Symposium",
+      "reader_slug": "Symposium",
+      "tlg": "tlg011",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 17,
+      "title": "Republic",
+      "reader_slug": "Republic",
+      "tlg": "tlg030",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 18,
+      "title": "Phaedrus",
+      "reader_slug": "Phaedrus",
+      "tlg": "tlg012",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 19,
+      "title": "Cratylus",
+      "reader_slug": "Cratylus",
+      "tlg": "tlg005",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 20,
+      "title": "Parmenides",
+      "reader_slug": "Parmenides",
+      "tlg": "tlg009",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 21,
+      "title": "Theaetetus",
+      "reader_slug": "Theaetetus",
+      "tlg": "tlg006",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 22,
+      "title": "Sophist",
+      "reader_slug": "Sophist",
+      "tlg": "tlg007",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 23,
+      "title": "Statesman",
+      "reader_slug": "Statesman",
+      "tlg": "tlg008",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 24,
+      "title": "Philebus",
+      "reader_slug": "Philebus",
+      "tlg": "tlg010",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 25,
+      "title": "Timaeus",
+      "reader_slug": "Timaeus",
+      "tlg": "tlg031",
+      "edition": "perseus-grc2"
+    },
+    {
+      "order": 26,
+      "title": "Critias",
+      "reader_slug": "Critias",
+      "tlg": "tlg032",
+      "edition": "perseus-grc2"
+    }
+  ]
+}

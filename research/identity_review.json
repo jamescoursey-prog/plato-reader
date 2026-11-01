@@ -1,0 +1,178 @@
+{
+  "version": "0.1",
+  "purpose": "Passage-specific source-checked exceptions to a conservative roster scan; no blanket identity approval",
+  "excluded_identity": [
+    {
+      "id": "euthydemus",
+      "work": "Republic",
+      "section": "328b",
+      "wrong_identity": "Euthydemus son of Cephalus, brother of Polemarchus",
+      "reference": "https://classics.mit.edu/Plato/republic.1.introduction.html",
+      "cross_check": "Evelyn Abbott, A Subject-Index to the Dialogues of Plato (1875), under Euthydemus"
+    },
+    {
+      "id": "euthydemus",
+      "work": "Symposium",
+      "section": "222b",
+      "wrong_identity": "Euthydemus son of Diocles",
+      "reference": "https://plato.johnhboyer.com/Symposium/book/1/?loc=222b",
+      "cross_check": "Evelyn Abbott, A Subject-Index to the Dialogues of Plato (1875), under Euthydemus"
+    }
+  ],
+  "allowed_lowercase": [
+    {
+      "id": "prodicus",
+      "work": "Laches",
+      "section": "197d",
+      "token": "προδίκῳ",
+      "reference": "https://plato.johnhboyer.com/Laches/book/1/?loc=197d",
+      "reason": "Socrates explicitly names the sophist; Burnet's Greek has a lowercase initial"
+    },
+    {
+      "id": "prodicus",
+      "work": "Theaetetus",
+      "section": "151b",
+      "token": "προδίκῳ",
+      "reference": "https://plato.johnhboyer.com/Theaetetus/book/1/?loc=151b",
+      "reason": "Socrates names Prodicus as an alternative teacher; Burnet's Greek has a lowercase initial"
+    },
+    {
+      "id": "melissus",
+      "work": "Theaetetus",
+      "section": "183e",
+      "token": "μέλισσον",
+      "reference": "https://adfonteslibrary.org/work-plato-theaetetus",
+      "reason": "Socrates explicitly names Melissus in the lowercase accusative at 183e; the context contrasts him with Parmenides."
+    }
+  ],
+  "documented_positive": [
+    {
+      "id": "euthydemus",
+      "work": "Cratylus",
+      "section": "386d",
+      "reference": "https://digicoll.lib.berkeley.edu/record/205907/files/b20762571_B000771950.pdf",
+      "reason": "Abbott indexes Euthydemus of Chios' thesis at Cratylus 386d"
+    },
+    {
+      "id": "agathon",
+      "work": "Protagoras",
+      "section": "315e",
+      "reference": "https://academic.oup.com/edited-volume/61673/chapter-abstract/548066461",
+      "reason": "Oxford Classical Dictionary explicitly identifies the boy Agathon of Protagoras with the tragedian"
+    },
+    {
+      "id": "thales",
+      "work": "Republic",
+      "section": "600a",
+      "reference": "https://plato.johnhboyer.com/Republic/book/10/?loc=600a",
+      "reason": "The text explicitly identifies Thales the Milesian, using the rare genitive Θάλεώ.",
+      "scope": "Only this passage checked"
+    },
+    {
+      "id": "hippias",
+      "work": "Phaedrus",
+      "section": "267b",
+      "reference": "https://adfonteslibrary.org/work-plato-phaedrus",
+      "reason": "Hippias is explicitly identified as the visitor from Elis.",
+      "scope": "Only this passage checked"
+    },
+    {
+      "id": "gorgias",
+      "work": "Philebus",
+      "section": "58a",
+      "reference": "https://adfonteslibrary.org/work-plato-philebus",
+      "reason": "Protarchus directly cites Gorgias's account of the persuasive art.",
+      "scope": "Only this passage checked"
+    },
+    {
+      "id": "polus",
+      "work": "Phaedrus",
+      "section": "267b",
+      "reference": "https://adfonteslibrary.org/work-plato-phaedrus",
+      "reason": "Polus is listed by his rhetorical devices alongside known teachers of rhetoric.",
+      "scope": "Only this passage checked"
+    },
+    {
+      "id": "aristophanes",
+      "work": "Apology",
+      "section": "19c",
+      "reference": "https://adfonteslibrary.org/work-plato-apology",
+      "reason": "Socrates identifies Aristophanes by his stage comedy about Socrates.",
+      "scope": "Only this passage checked"
+    },
+    {
+      "id": "simonides",
+      "work": "Protagoras",
+      "section": "339a",
+      "reference": "https://adfonteslibrary.org/work-plato-protagoras",
+      "reason": "Protagoras quotes an ode explicitly attributed to the lyric poet Simonides.",
+      "scope": "Only this passage checked"
+    },
+    {
+      "id": "evenus",
+      "work": "Apology",
+      "section": "20b",
+      "reference": "https://www.cambridge.org/core/books/abs/early-greek-political-thought-from-homer-to-the-sophists/evenus/8E6A9B7D7CB5A99F524D888C77A432EA",
+      "reason": "Socrates explicitly names Evenus as a sophist from Paros; literary attribution across the two Parian Evenuses is a separate question.",
+      "scope": "Only this passage checked"
+    },
+    {
+      "id": "solon",
+      "work": "Protagoras",
+      "section": "343a",
+      "reference": "https://adfonteslibrary.org/work-plato-protagoras",
+      "reason": "Plato includes the Athenian lawgiver Solon in his list of Seven Sages.",
+      "scope": "Only this passage checked"
+    },
+    {
+      "id": "melissus",
+      "work": "Theaetetus",
+      "section": "183e",
+      "reference": "https://adfonteslibrary.org/work-plato-theaetetus",
+      "reason": "Socrates names Melissus explicitly as the exponent of the One; lowercase personal-name token μέλισσον."
+    }
+  ],
+  "full_lowercase_name_ids": [
+    "prodicus"
+  ],
+  "evidence_for_lowercase_policy": "https://plato.johnhboyer.com/lemma/prodikos/ — 57 tokens, 13 works; excluding Theages yields 56 tokens expected in the project's 26 texts. Other names remain capitalization-restricted.",
+  "historicity_notes": [
+    {
+      "id": "euthydemus",
+      "status": "historicity debated in scholarship",
+      "reference": "https://academic.oup.com/edited-volume/61673/chapter-abstract/548947367",
+      "contrasting_reference": "https://plato.stanford.edu/entries/sophists/",
+      "note": "Oxford Classical Dictionary argues that Aristotle independently attests Euthydemus; Stanford Encyclopedia of Philosophy treats historical existence of both brothers as uncertain. This does not affect identification of their named roles in Plato."
+    },
+    {
+      "id": "dionysodorus",
+      "status": "historicity debated in scholarship",
+      "reference": "https://plato.stanford.edu/entries/sophists/",
+      "note": "His name is explicit in Plato's Euthydemus; independent evidence of the brother's existence is debated."
+    },
+    {
+      "id": "evenus",
+      "status": "multiple ancient poets of same name",
+      "reference": "https://www.cambridge.org/core/books/abs/early-greek-political-thought-from-homer-to-the-sophists/evenus/8E6A9B7D7CB5A99F524D888C77A432EA",
+      "contrasting_reference": "https://en.wikisource.org/wiki/Dictionary_of_Greek_and_Roman_Biography_and_Mythology/Evenus_2.",
+      "note": "Ancient sources mention two elegiac poets of Paros named Evenus. The name of the Parian teacher in Plato is explicit, but attribution of all surviving verses to that individual requires separate checking."
+    },
+    {
+      "id": "melissus",
+      "status": "collective plural at 180e; singular name at 183e",
+      "reference": "https://adfonteslibrary.org/work-plato-theaetetus",
+      "note": "Theaetetus 180e uses a rhetorical plural Μέλισσοί ('Melissuses') for members of the Eleatic camp. The unambiguous singular name μέλισσον appears again at 183e. Both are indexed, but the plural reference is flagged as collective and is not an independent second individual."
+    }
+  ],
+  "collective_name_forms": [
+    {
+      "id": "melissus",
+      "work": "Theaetetus",
+      "section": "180e",
+      "token": "Μέλισσοί",
+      "kind": "collective_plural",
+      "reference": "https://assets.cambridge.org/97811084/16337/excerpt/9781108416337_excerpt.pdf",
+      "note": "Scholarship interprets this as a pluralized reference to Melissus and those of his school, not a separate philosopher called 'Melissuses'."
+    }
+  ]
+}

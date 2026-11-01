@@ -97,3 +97,84 @@ jobs:
           if [ "$code" -ne 0 ] && [ "$code" -ne 5 ]; then
             exit "$code"
           fi
+
+  preview:
+    name: preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Extract Meno records, build and test the preview
+        run: bash preview/build-with-meno.sh
+      - name: Save preview as a downloadable artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: concordance-preview
+          path: preview/dist/
+          include-hidden-files: true
+
+  meno-extraction:
+    name: Meno name extraction
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test reusable Greek name scanner
+        run: python -m unittest discover -s research/tests -p 'test_*.py'
+      - name: Download pinned Perseus Greek Meno (temporary only)
+        run: |
+          curl --fail --location --silent --show-error --retry 3 \
+            'https://raw.githubusercontent.com/PerseusDL/canonical-greekLit/a6eb0cc3e6f6e382934a2c8b33577d2fb4371e00/data/tlg0059/tlg024/tlg0059.tlg024.perseus-grc2.xml' \
+            -o "${RUNNER_TEMP}/meno-grc.xml"
+      - name: Scan Greek text and compare against audited baseline
+        run: |
+          python -m research.meno_name_scan "${RUNNER_TEMP}/meno-grc.xml" \
+            --expected research/meno_expected.json \
+            --output "${RUNNER_TEMP}/meno-candidates.json"
+      - name: Save derived candidate metadata only
+        uses: actions/upload-artifact@v4
+        with:
+          name: meno-explicit-name-candidates
+          path: ${{ runner.temp }}/meno-candidates.json
+      - name: Download pinned Theaetetus Greek (temporary)
+        run: |
+          curl --fail --location --silent --show-error --retry 3 \
+            'https://raw.githubusercontent.com/PerseusDL/canonical-greekLit/a6eb0cc3e6f6e382934a2c8b33577d2fb4371e00/data/tlg0059/tlg006/tlg0059.tlg006.perseus-grc2.xml' \
+            -o "${RUNNER_TEMP}/theaetetus.xml"
+      - name: Compare Theaetetus scan with the audited passage inventory
+        run: |
+          python -m research.theaetetus_name_scan "${RUNNER_TEMP}/theaetetus.xml" \
+            --expected research/theaetetus_expected.json \
+            --output "${RUNNER_TEMP}/theaetetus-candidates.json"
+      - name: Save derived Theaetetus metadata only
+        uses: actions/upload-artifact@v4
+        with:
+          name: theaetetus-explicit-name-candidates
+          path: ${{ runner.temp }}/theaetetus-candidates.json
+      - name: Download pinned Sophist Greek (temporary only)
+        run: |
+          curl --fail --location --silent --show-error --retry 3 \
+            'https://raw.githubusercontent.com/PerseusDL/canonical-greekLit/a6eb0cc3e6f6e382934a2c8b33577d2fb4371e00/data/tlg0059/tlg007/tlg0059.tlg007.perseus-grc2.xml' \
+            -o "${RUNNER_TEMP}/sophist.xml"
+      - name: Audit Sophist explicit-name inventory
+        run: |
+          python -m research.sophist_name_scan "${RUNNER_TEMP}/sophist.xml" \
+            --expected research/sophist_expected.json \
+            --output "${RUNNER_TEMP}/sophist-candidates.json"
+      - name: Archive Sophist candidate metadata only
+        uses: actions/upload-artifact@v4
+        with:
+          name: sophist-explicit-name-candidates
+          path: ${{ runner.temp }}/sophist-candidates.json

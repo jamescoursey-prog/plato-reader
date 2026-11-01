@@ -1,0 +1,106 @@
+{
+  "sections_scanned": 343,
+  "first_section": "142a",
+  "last_section": "210d",
+  "total_name_occurrences": 53,
+  "distinct_mentioned_sections": 37,
+  "identities": {
+    "protagoras": {
+      "occurrences": 34,
+      "sections": [
+        "152a",
+        "152b",
+        "152c",
+        "152e",
+        "154b",
+        "154c",
+        "155d",
+        "160c",
+        "160d",
+        "161b",
+        "161d",
+        "161e",
+        "162a",
+        "162d",
+        "164e",
+        "165e",
+        "168c",
+        "169d",
+        "170a",
+        "170c",
+        "170e",
+        "171b",
+        "171c",
+        "171e",
+        "172b",
+        "178b",
+        "178e",
+        "179d",
+        "183c"
+      ]
+    },
+    "parmenides": {
+      "occurrences": 3,
+      "sections": [
+        "152e",
+        "183e"
+      ]
+    },
+    "heraclitus": {
+      "occurrences": 3,
+      "sections": [
+        "152e",
+        "160d",
+        "179d"
+      ]
+    },
+    "empedocles": {
+      "occurrences": 1,
+      "sections": [
+        "152e"
+      ]
+    },
+    "epicharmus": {
+      "occurrences": 1,
+      "sections": [
+        "152e"
+      ]
+    },
+    "homer": {
+      "occurrences": 7,
+      "sections": [
+        "152e",
+        "153a",
+        "153d",
+        "160d",
+        "170e",
+        "183e",
+        "194c"
+      ]
+    },
+    "pindar": {
+      "occurrences": 1,
+      "sections": [
+        "173e"
+      ]
+    },
+    "thales": {
+      "occurrences": 1,
+      "sections": [
+        "174a"
+      ]
+    },
+    "melissus": {
+      "occurrences": 1,
+      "sections": [
+        "180e"
+      ]
+    },
+    "hesiod": {
+      "occurrences": 1,
+      "sections": [
+        "207a"
+      ]
+    }
+  }
+}

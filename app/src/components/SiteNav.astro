@@ -1,11 +1,11 @@
 ---
 // The site's top bar on every page but the reader (which has its own row):
-// the wordmark, then Works · Search · Lexicon · Phrases · Support and the
+// the wordmark, then Works · Search · Lexicon · Phrases · Thinkers · Support and the
 // theme, in spaced capitals on the stone. On a phone the links fold into a
 // menu beside a Search icon.
 import ThemeToggle from './ThemeToggle.astro';
 
-interface Props { current?: 'works' | 'search' | 'lexicon' | 'phrases' | 'support'; }
+interface Props { current?: 'works' | 'search' | 'lexicon' | 'phrases' | 'thinkers' | 'support'; }
 const { current } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const LINKS = [
@@ -13,6 +13,7 @@ const LINKS = [
   { key: 'search', label: 'Search', href: `${base}/search` },
   { key: 'lexicon', label: 'Lexicon', href: `${base}/lemma/` },
   { key: 'phrases', label: 'Phrases', href: `${base}/phrases` },
+  { key: 'thinkers', label: 'Thinkers', href: `${base}/thinkers` },
   { key: 'support', label: 'Support', href: `${base}/support` },
 ] as const;
 ---
