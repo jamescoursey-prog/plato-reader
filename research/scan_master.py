@@ -162,6 +162,28 @@ def scan_corpus(corpus: dict, roster: dict, sources: Path) -> dict:
             if actual != expected:
                 raise ValueError(f"Cross-checked form inventory changed for {person_id}: "
                                  f"{actual} rather than {expected}; review Greek forms")
+    # Only the specifically documented passages below have received
+    # passage-level scholarly identity checks. Other lexical hits remain
+    # unreviewed, even when they are adjacent in the same dialogue.
+    observed = {(m["person_id"], m["work"], m["section"]) for m in matches}
+    checked = identity_review["documented_positive"]
+    checked_keys = {(item["id"],item["work"],item["section"]) for item in checked}
+    if canonical_corpus and not checked_keys.issubset(observed):
+        raise ValueError("Documented positive identity citation is missing: "+
+                         str(checked_keys - observed))
+    checked_passages = [
+        {"person_id":item["id"], "work":item["work"],
+         "section":item["section"],"reference":item["reference"],
+         "reason":item["reason"]}
+        for item in checked
+        if (item["id"],item["work"],item["section"]) in observed
+    ]
+    historicity_notes = [
+        {"person_id":item["id"], "status":item["status"],
+         "note":item["note"],"reference":item["reference"]}
+        for item in identity_review.get("historicity_notes",[])
+        if item["id"] in known
+    ]
     appearances = defaultdict(list)
     for match in matches:
         appearances[match["person_id"]].append(match)
@@ -181,6 +203,8 @@ def scan_corpus(corpus: dict, roster: dict, sources: Path) -> dict:
         "name_occurrences":sum(m["occurrences"] for m in matches),
         "sources":audits,"people":people,"matches":matches,
         "identity_exclusions":excluded_matches,
+        "documented_identity_checks":checked_passages,
+        "historicity_notes":historicity_notes,
         "lowercase_name_exceptions": [
             {"person_id":key[0],"work":key[1],"section":key[2],
              "source_url":allowed_lowercase[key]["reference"]}
