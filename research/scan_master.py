@@ -186,6 +186,19 @@ def scan_corpus(corpus: dict, roster: dict, sources: Path) -> dict:
         for item in checked
         if (item["id"],item["work"],item["section"]) in observed
     ]
+    triage = json.loads(
+        (Path(__file__).with_name("roster_identity_triage.json")).read_text(encoding="utf-8")
+    )
+    triage_entries = triage["entries"]
+    triage_ids = [r["id"] for r in triage_entries]
+    if len(triage_ids) != len(roster["people"]) or set(triage_ids) != set(known):
+        raise ValueError("Final identity risk triage must cover exactly the 31 roster members")
+    if canonical_corpus:
+        example_keys = {(r["id"],r["example_work"],r["example_section"])
+                        for r in triage_entries}
+        if not example_keys.issubset(observed):
+            raise ValueError("Identity risk triage cites missing example matches: "+
+                             str(example_keys-observed))
     historicity_notes = [
         {"person_id":item["id"], "status":item["status"],
          "note":item["note"],"reference":item["reference"]}
@@ -219,6 +232,7 @@ def scan_corpus(corpus: dict, roster: dict, sources: Path) -> dict:
             if (x["id"],x["work"],x["section"]) in observed
         ],
         "historicity_notes":historicity_notes,
+        "roster_identity_triage":triage_entries,
         "lowercase_name_exceptions": [
             {"person_id":key[0],"work":key[1],"section":key[2],
              "source_url":allowed_lowercase[key]["reference"]}
