@@ -45,6 +45,21 @@ describe('thinker concordance: pilot quality gates', () => {
     expect(distinctVerifiedThinkerCount([checked, { ...checked, id: 'other-mention' }])).toBe(1);
   });
 
+  it('excludes incidental mentions even when the source record is complete', () => {
+    const reviewedMention: Engagement = {
+      ...ENGAGEMENTS[0],
+      kind: 'incidental_mention',
+      status: 'verified',
+      primaryGreekExcerpt: 'Test fixture only',
+      sourceEdition: 'Test edition only',
+      sourceIdentifier: 'test-source:76c',
+      scholarlyReference: 'Test reference only',
+      reviewedBy: 'test-reviewer',
+    };
+    expect(isCountable(reviewedMention)).toBe(false);
+    expect(verifiedEngagements([reviewedMention])).toEqual([]);
+  });
+
   it('links the source citation to the existing reader route', () => {
     expect(readerHref(ENGAGEMENTS[0])).toBe('/Meno/book/1?loc=76c');
     expect(readerHref(ENGAGEMENTS[0], '/plato-reader')).toBe('/plato-reader/Meno/book/1?loc=76c');
