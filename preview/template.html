@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="An experimental index of historical thinkers and intellectual engagements in Plato.">
+<title>Historical Thinkers | Plato Concordance Preview</title>
+<style>
+:root{--paper:#f6f2eb;--ink:#282923;--muted:#6c695f;--rule:#d3ccc0;--accent:#874a3a;--white:#fffcf7}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:1.1rem/1.55 Georgia,"Times New Roman",serif}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{width:min(1100px,calc(100% - 2.5rem));margin:auto}
+header{background:var(--white);border-bottom:1px solid var(--rule)}
+nav{padding:1.1rem 0;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.brand{font-size:1rem;color:var(--ink);text-decoration:none}
+.brand span{font-size:1.45rem;margin-right:.5rem}
+.eyebrow,.label,.status,.kind,dt,.proof{font:600 .72rem/1.4 system-ui,sans-serif;letter-spacing:.13em;text-transform:uppercase}
+.signet{border:1px solid var(--rule);padding:.35rem .6rem;color:var(--accent)}
+.hero{padding:4rem 0 2.5rem;border-bottom:1px solid var(--rule)}
+.hero .eyebrow{color:var(--accent)}h1{font-size:clamp(2.8rem,6vw,4.8rem);line-height:1.07;font-weight:400;letter-spacing:-.025em;margin:0 0 1.5rem}
+.lead{font-size:1.24rem;max-width:770px}.scope{font-size:.96rem;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:2rem 0 2.5rem}
+.stat{border-top:1px solid var(--rule);padding-top:.65rem}.number{display:block;font-size:2.65rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.label{display:block;color:var(--muted);margin-top:.4rem}
+.browser{padding:1.3rem 0 0;border-top:1px solid var(--rule)}
+h2{font-size:1.85rem;font-weight:400;margin:.4rem 0 1rem}
+input{width:100%;background:var(--white);border:1px solid var(--rule);border-radius:0;color:var(--ink);padding:1rem;font:1.03rem Georgia,serif}
+.results{font:600 .75rem system-ui,sans-serif;color:var(--muted);margin:1rem 0 1.5rem}
+.record{border-top:2px solid var(--ink);padding:1.65rem 0 2.7rem}
+.record[hidden],#empty[hidden]{display:none}
+.record-title{display:flex;justify-content:space-between;align-items:start;gap:1.5rem;flex-wrap:wrap}
+.record .eyebrow{color:var(--accent);margin:0 0 .5rem}
+h3{font-size:2rem;font-weight:400;margin:0;line-height:1.15}
+h3 span{font-size:1.1rem;color:var(--muted);margin-left:.6rem}
+.status{color:var(--accent);border:1px solid var(--rule);padding:.45rem .65rem}
+.kind{color:var(--muted);margin:1.4rem 0 .55rem}
+.claim{font-size:1.27rem;margin:.5rem 0;max-width:800px}
+.note,.review{color:var(--muted);max-width:800px}
+.audit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem 2rem;margin:1.6rem 0}
+.audit div{border-top:1px solid var(--rule);padding-top:.55rem}
+dt{color:var(--muted);margin-bottom:.35rem}dd{margin:0;font-size:1rem}
+.review{border-left:3px solid var(--rule);padding-left:1rem;font-style:italic}
+.reader{display:inline-block;margin-top:.2rem;font-size:.98rem}
+.caveat{border-top:1px solid var(--rule);padding:1.3rem 0 2rem;font-size:.97rem;color:var(--muted)}
+footer{border-top:1px solid var(--rule);padding:1.3rem 0 2.7rem;color:var(--muted);font-size:.9rem}
+footer p{max-width:870px}
+@media(max-width:640px){.signet{display:none}.hero{padding:2.5rem 0 1.8rem}.stats{gap:.7rem}.number{font-size:2rem}.label{font-size:.63rem}.audit{grid-template-columns:1fr}h3 span{display:block;margin:.2rem 0}}
+</style>
+</head>
+<body>
+<header><nav class="wrap"><a class="brand" href="./"><span lang="grc">ΠΛΑΤΩΝ</span> Plato Concordance</a><span class="signet">Independent research preview</span></nav></header>
+<main class="wrap">
+<section class="hero">
+<p class="eyebrow">Historical thinkers · research prototype</p>
+<h1>Who is Plato<br>thinking with?</h1>
+<p class="lead">An index of historical thinkers and philosophical engagements across Plato's dialogues, distinguishing provisional leads from verified evidence.</p>
+<p class="scope">Initial exploration: %%PILOT_WORKS%%. The planned 26-dialogue corpus is not yet comprehensively indexed.</p>
+</section>
+<section class="stats" aria-label="Evidence totals">
+<div class="stat"><span class="number">%%CANDIDATES%%</span><span class="label">Candidate passages</span></div>
+<div class="stat"><span class="number">%%VERIFIED%%</span><span class="label">Verified engagements</span></div>
+<div class="stat"><span class="number">%%PEOPLE%%</span><span class="label">Verified thinkers</span></div>
+</section>
+<section class="browser"><h2>Passage records</h2><label for="filter" class="eyebrow">Filter records</label><input id="filter" type="search" autocomplete="off" placeholder="Thinker, dialogue, doctrine, or citation…" aria-label="Filter passage records">
+<p id="results" class="results" role="status">Showing %%TOTAL%% research record(s)</p></section>
+<section aria-label="Evidence records" id="records">%%RECORDS%%</section>
+<p id="empty" hidden>No research records match this search.</p>
+<aside class="caveat"><strong>Preview limitations:</strong> No complete scholarly concordance, verified historical claim, original Greek passage, or English translation is offered here. Passage links open the independently hosted Plato Reader rather than republishing its text.</aside>
+</main>
+<footer><div class="wrap">
+<p class="proof">Sources and attribution</p>
+<p>This is an independent concordance prototype developed in a fork of <a href="https://github.com/johnhboyer-sys/plato-reader" rel="noopener noreferrer">John H. Boyer's Plato Reader</a>. Original software © 2026 John Boyer (MIT); <a href="LICENSE.txt">license notice</a>. The linked reading site remains <a href="https://plato.johnhboyer.com" rel="noopener noreferrer">Plato Reader</a>.</p>
+<p>This standalone preview does not redistribute the original website's TLG-derived Greek data, English translations, fonts, images, feedback forms, or domain configuration.</p>
+</div></footer>
+<script>
+const filter=document.getElementById('filter'),records=[...document.querySelectorAll('[data-record]')],results=document.getElementById('results'),empty=document.getElementById('empty');
+function update(){const q=filter.value.toLocaleLowerCase().trim();let total=0;for(const record of records){const show=(record.dataset.search||'').includes(q);record.hidden=!show;if(show)total++}results.textContent='Showing '+total+' research record(s)';empty.hidden=total!==0}
+filter.addEventListener('input',update);
+</script>
+</body>
+</html>

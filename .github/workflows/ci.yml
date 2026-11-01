@@ -97,3 +97,24 @@ jobs:
           if [ "$code" -ne 0 ] && [ "$code" -ne 5 ]; then
             exit "$code"
           fi
+
+  preview:
+    name: preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build rights-limited concordance preview
+        run: node --experimental-strip-types preview/build.mjs
+      - name: Verify preview and publication inventory
+        run: node --experimental-strip-types --test preview/check.test.mjs
+      - name: Save preview as a downloadable artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: concordance-preview
+          path: preview/dist/
+          include-hidden-files: true
