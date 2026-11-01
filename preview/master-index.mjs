@@ -11,6 +11,10 @@ if(data.version!=='0.1'||data.source_revision!==REV||data.works_scanned!==26||
 const people=new Map(data.people.map(p=>[p.id,p]));
 const sources=new Map(data.sources.map(s=>[s.work,s]));
 const matches=new Map(data.people.map(p=>[p.id,[]]));
+if(!Array.isArray(data.documented_identity_checks)||!Array.isArray(data.historicity_notes))
+ throw Error('Missing historical-identity review inventory');
+const checks=new Map(data.documented_identity_checks.map(x=>[x.person_id+':'+x.work+':'+x.section,x]));
+const cautions=new Map(data.historicity_notes.map(x=>[x.person_id,x]));
 if(!Array.isArray(data.identity_exclusions)||!Array.isArray(data.lowercase_name_exceptions)||
    data.identity_exclusions.length!==2||data.lowercase_name_exceptions.length!==2)
   throw Error('Missing independently audited identity exceptions');
@@ -37,11 +41,18 @@ function renderPerson(p){
  }
  const citations=[...byWork.entries()].sort((a,b)=>sources.get(a[0]).order-sources.get(b[0]).order)
  .map(([work,rows])=>'<li><strong><i>'+esc(work)+'</i></strong>: '+
-   rows.map(m=>'<a href="'+esc(link(work,m.section))+'" target="_blank" rel="noopener noreferrer" title="'+esc(m.tokens.join(', '))+'">'+esc(m.section)+'</a>').join(', ')+
+   rows.map(m=>{
+     const review=checks.get(p.id+':'+work+':'+m.section);
+     const title=m.tokens.join(', ')+(review?' — identification checked at this passage':' — unreviewed name candidate');
+     return '<a href="'+esc(link(work,m.section))+'" target="_blank" rel="noopener noreferrer" title="'+esc(title)+'">'+esc(m.section)+'</a>'+
+       (review?'<sup title="Identity checked at this passage; other references remain provisional">✓</sup>':'');
+   }).join(', ')+
    '</li>').join('\n');
  return '<article class="person" id="person-'+esc(p.id)+'"><header><h3>'+esc(p.name)+'</h3>'+
    '<span class="count">'+found.length+' cited sections in '+p.dialogues+' dialogues</span></header>'+
    (p.review_flag?'<small class="caution">Flagged: '+esc(p.review_flag.replaceAll('_',' '))+'</small>':'')+
+   (cautions.get(p.id)?'<p class="muted"><strong>Historical caution:</strong> '+esc(cautions.get(p.id).note)+
+    ' <a href="'+esc(cautions.get(p.id).reference)+'" target="_blank" rel="noopener noreferrer">Scholarly source</a></p>':'')+
    (citations?'<ul>'+citations+'</ul>':'<p class="muted">No matches in this restricted scan; this does not establish absence.</p>')+
    '</article>';
 }
@@ -85,6 +96,9 @@ const html=['<!doctype html><html lang="en"><head><meta charset="utf-8">',
  '<div><strong>'+data.matched_sections+'</strong><span>Person–passage candidates</span></div>',
  '</div><p class="disclaimer"><strong>Provisional:</strong> These names and Stephanus references are automated candidates, not independently verified identities or philosophical engagements. Namesakes and missing Greek inflections require checking. Existing reviewed records are unchanged.</p>',
  '<p><a href="./master-index.csv">Download the candidate citations (CSV)</a></p>',
+ '<p class="muted">A checkmark ✓ beside a citation identifies a <em>specific, source-checked historical identification</em>, not an approval of every occurrence of that name. '+
+ data.documented_identity_checks.length+' positive identifications are documented individually; '+data.historicity_notes.length+
+ ' scholarly identity cautions are tracked.</p>',
  '<p class="muted">Source-checked corrections: '+data.identity_exclusions.length+
  ' references to namesakes excluded; '+data.lowercase_name_exceptions.length+
  ' lowercase proper names specifically checked (with additional Prodicus forms allowed after lexicon comparison). Other identifications remain provisional.</p>',
