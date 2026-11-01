@@ -46,6 +46,12 @@ export const THINKERS: readonly Thinker[] = [
   { id: 'protagoras', name: 'Protagoras', greekName: 'Πρωταγόρας', historicalConfidence: 'secure' },
   { id: 'theognis', name: 'Theognis', greekName: 'Θέογνις', historicalConfidence: 'secure' },
   { id: 'homer', name: 'Homer', greekName: 'Ὅμηρος', historicalConfidence: 'disputed' },
+  { id: 'heraclitus', name: 'Heraclitus', greekName: 'Ἡράκλειτος', historicalConfidence: 'secure' },
+  { id: 'parmenides', name: 'Parmenides', greekName: 'Παρμενίδης', historicalConfidence: 'secure' },
+  { id: 'epicharmus', name: 'Epicharmus', greekName: 'Ἐπίχαρμος', historicalConfidence: 'secure' },
+  { id: 'thales', name: 'Thales', greekName: 'Θαλῆς', historicalConfidence: 'secure' },
+  { id: 'melissus', name: 'Melissus', greekName: 'Μέλισσος', historicalConfidence: 'secure' },
+  { id: 'hesiod', name: 'Hesiod', greekName: 'Ἡσίοδος', historicalConfidence: 'secure' },
 ];
 
 export const ENGAGEMENTS: readonly Engagement[] = [
