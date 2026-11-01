@@ -53,3 +53,32 @@ not automatically made case insensitive. Regression checks in
 `research/scan_master.py` enforce both inventories and Empedocles' two
 explicit name tokens; these are limited, source-dependent checks,
 not blanket scholarly verification.
+
+## Source-checked identification audit, round 2
+
+**Thales, Republic 600a.** Burnet's Greek has the rare genitive
+`Θάλεώ`, explicitly followed by `τοῦ Μιλησίου`. Added to the
+conservative name dictionary. The next full-corpus expected total is
+**859 provisional person–passage references, 1,054 word occurrences**,
+one more of each than the previous run.
+
+Specific positive identifications now recorded in
+`research/identity_review.json`: Thales, `Republic` 600a; Agathon,
+`Protagoras` 315e (supported by the Oxford Classical Dictionary);
+Hippias of Elis, `Phaedrus` 267b; Gorgias, `Philebus` 58a;
+Polus, `Phaedrus` 267b; Aristophanes, `Apology` 19c;
+Simonides, `Protagoras` 339a; Evenus of Paros, `Apology` 20b;
+Solon, `Protagoras` 343a; and Euthydemus of Chios, `Cratylus` 386d.
+
+The two excluded Euthydemus namesakes (Republic 328b and Symposium
+222b) remain excluded. The index marks only the ten specific
+checked positive references; **the other references remain provisional**.
+Euthydemus and Dionysodorus have debated independent historicity:
+Oxford Classical Dictionary argues independent Aristotle testimony
+for Euthydemus; Stanford Encyclopedia of Philosophy discusses
+uncertainty about both brothers. Two poets named Evenus of Paros
+also require caution. The pluralized *Theaetetus* 180e Melissus
+reference remains deliberately outside our singular-name index.
+
+No full Greek text is republished and the three-dialogue reviewed
+pilot remains unaffected.
