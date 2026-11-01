@@ -1,0 +1,61 @@
+{
+  "sections_scanned": 151,
+  "first_section": "70a",
+  "last_section": "100c",
+  "total_name_occurrences": 18,
+  "distinct_mentioned_sections": 15,
+  "identities": {
+    "gorgias": {
+      "occurrences": 8,
+      "sections": [
+        "70b",
+        "71c",
+        "71d",
+        "73c",
+        "76b",
+        "76c",
+        "95c",
+        "96d"
+      ]
+    },
+    "prodicus": {
+      "occurrences": 2,
+      "sections": [
+        "75e",
+        "96d"
+      ]
+    },
+    "empedocles": {
+      "occurrences": 1,
+      "sections": [
+        "76c"
+      ]
+    },
+    "pindar": {
+      "occurrences": 2,
+      "sections": [
+        "76d",
+        "81b"
+      ]
+    },
+    "protagoras": {
+      "occurrences": 3,
+      "sections": [
+        "91d",
+        "91e"
+      ]
+    },
+    "theognis": {
+      "occurrences": 1,
+      "sections": [
+        "95d"
+      ]
+    },
+    "homer": {
+      "occurrences": 1,
+      "sections": [
+        "100a"
+      ]
+    }
+  }
+}

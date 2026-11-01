@@ -118,3 +118,31 @@ jobs:
           name: concordance-preview
           path: preview/dist/
           include-hidden-files: true
+
+  meno-extraction:
+    name: Meno name extraction
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test the XML name-extraction code
+        run: python -m unittest discover -s research/tests -p 'test_*.py'
+      - name: Download pinned Perseus Greek Meno (temporary only)
+        run: |
+          curl --fail --location --silent --show-error --retry 3 \
+            'https://raw.githubusercontent.com/PerseusDL/canonical-greekLit/a6eb0cc3e6f6e382934a2c8b33577d2fb4371e00/data/tlg0059/tlg024/tlg0059.tlg024.perseus-grc2.xml' \
+            -o "${RUNNER_TEMP}/meno-grc.xml"
+      - name: Scan Greek text and compare against audited baseline
+        run: |
+          python research/meno_name_scan.py "${RUNNER_TEMP}/meno-grc.xml" \
+            --expected research/meno_expected.json \
+            --output "${RUNNER_TEMP}/meno-candidates.json"
+      - name: Save derived candidate metadata only
+        uses: actions/upload-artifact@v4
+        with:
+          name: meno-explicit-name-candidates
+          path: ${{ runner.temp }}/meno-candidates.json
