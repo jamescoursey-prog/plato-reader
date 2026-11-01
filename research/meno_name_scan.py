@@ -115,7 +115,7 @@ def greek_sections(tei_xml: bytes) -> list[tuple[str, str]]:
     def visit(node: ET.Element):
         nonlocal current
         tag = local(node.tag)
-        if tag in {"note", "label", "head"}:
+        if tag in {"note", "label", "head", "bibl"}:
             return
         if tag == "milestone" and node.get("unit") == "section":
             locus = node.get("n", "")
