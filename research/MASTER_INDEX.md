@@ -24,3 +24,13 @@ separately flagged. The two existing human research records remain unchanged.
 The first output is a *master person-to-passage index*, not an exhaustive
 intellectual engagement or doctrine index. We can refine accepted forms
 against Abbott, Nails, or textual editions after seeing the first report.
+
+## Publication
+
+`preview/master-index.mjs` generates a standalone searchable HTML roster,
+with individual thinker headings, every matched dialogue and Stephanus
+location, direct links to John Boyer's reader, and a CSV download.
+These are **unreviewed lexical candidates**, not previously text-checked
+pilot records. The previously published index is preserved at the website
+root. An unrecognized name inflection can lead to false negatives; identity
+flags are not silently converted into approvals.

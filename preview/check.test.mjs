@@ -10,7 +10,7 @@ const license=await readFile(join(dir,'dist/LICENSE.txt'),'utf8');
 describe('three-dialogue metadata-only preview',()=>{
  it('publishes exactly three files, excluding source text',async()=>{
   assert.deepEqual((await readdir(join(dir,'dist'))).sort(),
-    ['index.html','LICENSE.txt','.nojekyll'].sort());
+    ['index.html','LICENSE.txt','.nojekyll','master-index.html','master-index.csv'].sort());
  });
  it('retains original reviewed records independently of machine candidates',()=>{
   assert.equal(ENGAGEMENTS.length,2);

@@ -1,23 +1,34 @@
-# Three-dialogue preview and reusable scanner
+# Public concordance preview and provisional master index
 
-A single Greek TEI parser and named-reference scanner is now shared by the
-*Meno*, *Theaetetus*, and *Sophist*, with separate dialogue-specific
-dictionaries of names and exclusions and independently audited Stephanus
-citation inventories.
+There are now **two separate research outputs**:
 
-Build and test: `bash preview/build-with-meno.sh` from the repository
-root. The historical script name now runs all three dialogues.
+1. The original three-dialogue passage preview (*Meno*, *Theaetetus*,
+   *Sophist*): 74 candidate/review records, with one human text-checked
+   entry and zero fully verified philosophical engagements.
+2. A first-pass **31-person master name roster scanned against all 26
+   project dialogues** (*Apology* to *Critias*, with *Laws* excluded).
+   Open `master-index.html` and download the corresponding
+   `master-index.csv` for an easily usable prototype.
 
-The *Sophist* scan identifies Parmenides, Zeno of Elea, Xenophanes, and
-Homer by name, ten occurrences in eight cited sections. The adjective
-describing Protagorean writings at 232d and the named traditions at 242d
-are excluded from **explicit individual-name** counts and remain
-candidates for later investigation of philosophical allusions.
+The master list is a *restricted exact-Greek-name-form search*: it only
+matches names and inflections explicitly enumerated in
+`research/master_roster.json`. It ignores unrelated proper nouns and
+excludes ordinary lookalike words and school adjectives. It is NOT a
+complete philological identification: missing forms and namesakes
+remain possible, and zero matches are not evidence of absence.
 
-Expected preview: 74 records, 15 distinct people, 72 machine suggestions,
-1 human text-checked record, and 0 fully verified engagements.
-No existing scholarly status is promoted by the detector.
+A single script prepares both indexes and tests the source inventory:
 
-Only index.html, LICENSE.txt, and .nojekyll are deployed: temporary Greek
-source texts, English translations, and intermediate JSON are not
-published. The index is prepared during GitHub deployment, not on visits.
+```bash
+bash preview/build-with-meno.sh
+```
+
+The script's historical name survives for CI compatibility. The build
+downloads all 26 pinned Perseus TEI sources temporarily, scans their
+Greek text, and generates metadata pages. The Greek texts and intermediate
+JSON are **never** copied into the published output. Both HTML indexes,
+the metadata-only CSV, `LICENSE.txt`, and `.nojekyll` are deployed.
+
+This is a build-time research mechanism, **not a user-initiated website
+database rebuild**. The published master index does not overwrite or
+promote the original manually assessed entries.
