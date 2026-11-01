@@ -120,7 +120,10 @@ def greek_sections(tei_xml: bytes) -> list[tuple[str, str]]:
         if tag == "milestone" and node.get("unit") == "section":
             locus = node.get("n", "")
             if not LOC_RE.fullmatch(locus):
-                raise ValueError("Unexpected Stephanus section: " + locus)
+                # Some TEI files have structural milestones with unit="section"
+                # but without a Stephanus citation (e.g. "imbedded dialogue").
+                # Preserve the current citation and skip those markers.
+                return
             sections.append((locus, []))
             current = sections[-1][1]
         else:
