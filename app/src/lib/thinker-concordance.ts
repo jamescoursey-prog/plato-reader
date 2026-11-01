@@ -51,9 +51,12 @@ export const ENGAGEMENTS: readonly Engagement[] = [
     startSection: '76c',
     kind: 'explicit_name',
     doctrinalClaim: 'Socrates invokes an account of effluences when discussing the nature of color.',
-    interpretiveNote: 'Research candidate. Inspect the Greek and relevant testimonia before deciding how the argument engages Empedocles.',
-    status: 'candidate',
-    reviewNote: 'The passage, attribution, and edition have not been checked within this fork.',
+    interpretiveNote: 'The named reference and its subject have been checked against the displayed passage. The precise doctrinal interpretation and independent textual collation remain open.',
+    status: 'text_checked',
+    sourceEdition: 'Plato, Meno: Greek, John Burnet (OCT, 1903); English, W. R. M. Lamb (Loeb, 1924), via John Boyer’s Plato Reader.',
+    sourceIdentifier: 'https://plato.johnhboyer.com/Meno/book/1/?trans=lamb',
+    reviewedBy: 'Project researcher (passage check)',
+    reviewNote: '2026-11-01: Project researcher confirmed that Meno 76c–d explicitly names Empedocles and associates effluences and passages with an explanation of color. Text checked against the cited reader; independent Greek collation and secondary scholarship are still pending.',
   },
 ];
 

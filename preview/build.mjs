@@ -34,9 +34,14 @@ function renderRecord(e) {
   if (!status || !kind) throw new Error('Invalid record status or kind: ' + e.id);
   const search = [person.name, person.greekName, e.workId, e.stephanus,
     e.doctrinalClaim, e.interpretiveNote].join(' ').toLocaleLowerCase();
-  const reader = new URL('/' + encodeURIComponent(e.workId) +
-    '/book/1?loc=' + encodeURIComponent(e.startSection),
+  const reader = new URL(e.sourceIdentifier ??
+    ('/' + encodeURIComponent(e.workId) + '/book/1/'),
     'https://plato.johnhboyer.com');
+  // Keep the source's selected translation and add an exact Stephanus location.
+  if (reader.origin !== 'https://plato.johnhboyer.com') {
+    throw new Error('External reader link must point to the credited source');
+  }
+  reader.searchParams.set('loc', e.startSection);
   return [
     '<article class="record" data-record data-search="' + escapeHtml(search) + '">',
     '<div class="record-title"><div>',
@@ -48,8 +53,8 @@ function renderRecord(e) {
     '<p class="claim">' + escapeHtml(e.doctrinalClaim) + '</p>',
     '<p class="note">' + escapeHtml(e.interpretiveNote) + '</p>',
     '<dl class="audit">',
-    '<div><dt>Greek text</dt><dd>' +
-      (e.primaryGreekExcerpt && e.status !== 'candidate' ? 'Review record available' : 'Not independently checked') +
+    '<div><dt>Independent Greek transcription</dt><dd>' +
+      (e.primaryGreekExcerpt && e.status !== 'candidate' ? 'Review record available' : 'Still pending') +
       '</dd></div>',
     '<div><dt>Primary edition</dt><dd>' + escapeHtml(e.sourceEdition || 'Pending') + '</dd></div>',
     '<div><dt>Scholarly reference</dt><dd>' + escapeHtml(e.scholarlyReference || 'Pending') + '</dd></div>',
@@ -64,7 +69,7 @@ function renderRecord(e) {
 
 let html = await readFile(resolve(here, 'template.html'), 'utf8');
 const replacements = {
-  '%%CANDIDATES%%': String(ENGAGEMENTS.filter((e) => e.status === 'candidate').length),
+  '%%OPEN_RECORDS%%': String(ENGAGEMENTS.filter((e) => e.status === 'candidate' || e.status === 'text_checked').length),
   '%%VERIFIED%%': String(verifiedEngagements(ENGAGEMENTS).length),
   '%%PEOPLE%%': String(distinctVerifiedThinkerCount(ENGAGEMENTS)),
   '%%PILOT_WORKS%%': escapeHtml(PILOT_WORKS.join(' · ')),

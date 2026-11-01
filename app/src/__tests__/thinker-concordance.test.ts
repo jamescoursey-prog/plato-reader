@@ -19,9 +19,12 @@ describe('thinker concordance: pilot quality gates', () => {
     }
   });
 
-  it('does not report any candidate as a verified engagement', () => {
+  it('does not report a text-checked record as a verified engagement', () => {
     expect(ENGAGEMENTS).toHaveLength(1);
-    expect(ENGAGEMENTS[0].status).toBe('candidate');
+    expect(ENGAGEMENTS[0].status).toBe('text_checked');
+    expect(ENGAGEMENTS[0].sourceIdentifier).toBe('https://plato.johnhboyer.com/Meno/book/1/?trans=lamb');
+    expect(ENGAGEMENTS[0].sourceEdition).toContain('W. R. M. Lamb');
+    expect(ENGAGEMENTS[0].scholarlyReference).toBeUndefined();
     expect(verifiedEngagements(ENGAGEMENTS)).toEqual([]);
     expect(distinctVerifiedThinkerCount(ENGAGEMENTS)).toBe(0);
   });

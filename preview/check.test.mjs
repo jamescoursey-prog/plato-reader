@@ -15,11 +15,13 @@ describe('license-limited preview build', () => {
   it('contains the app’s research records without counting unverified evidence', () => {
     assert.equal(ENGAGEMENTS.length,1);
     assert.equal(verifiedEngagements(ENGAGEMENTS).length,0);
-    assert.match(html,/Awaiting source verification/);
+    assert.match(html,/Text checked; review pending/);
+    assert.match(html,/W\. R\. M\. Lamb/);
+    assert.match(html,/Records awaiting full verification/);
     assert.match(html,/Showing 1 research record/);
   });
   it('uses an external reader deep link', () => {
-    assert.match(html,/https:\/\/plato\.johnhboyer\.com\/Meno\/book\/1\?loc=76c/);
+    assert.match(html,/https:\/\/plato\.johnhboyer\.com\/Meno\/book\/1\/\?trans=lamb&amp;loc=76c/);
   });
   it('retains author and license notice', () => {
     assert.match(license,/Copyright © 2026 John Boyer/);

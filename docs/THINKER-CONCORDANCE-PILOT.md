@@ -14,12 +14,13 @@ broader corpus without treating those additional works as research results.
 
 - Adds a **Thinkers** navigation item and `/thinkers` research-pilot page.
 - Adds a typed, source-first data model, a single Empedocles/*Meno* 76c–d
-  **candidate**, a reader deep link, and a filter.
+  research record (now **text checked**), a reader deep link, and a filter.
 - Adds tests ensuring candidate observations do not inflate certified
   thinker counts. Even a `verified` flag is insufficient without explicit
   provenance and a reviewer field.
-- **Does not** perform text extraction, validate the candidate, reproduce
-  Greek source text, or make claims of complete corpus coverage.
+- **Does not** perform text extraction, independently collate the Greek,
+  complete a scholarly validation, reproduce Greek source text, or make claims
+  of complete corpus coverage.
 - **Does not** import numerical claims from the earlier conversational
   concordance. The old P1–P737 register is exploratory and unaudited.
 
@@ -58,6 +59,17 @@ In a fully provisioned repository, run the normal application tests:
 The new model tests are in
 `app/src/__tests__/thinker-concordance.test.ts`.
 
-The environment in which this pull request was drafted could not fetch npm
-dependencies, so CI results—not this document—must determine whether the
-Astro page and tests build successfully.
+CI runs the app, shared-code, pipeline, and independent preview checks.
+The preview is compiled from the same research records as the app.
+
+## First passage check (2026-11-01)
+
+The project researcher inspected Plato, *Meno* 76c–d at John Boyer's
+Plato Reader: https://plato.johnhboyer.com/Meno/book/1/?trans=lamb .
+The reader identifies John Burnet's Greek text (OCT, 1903) and
+W. R. M. Lamb's English translation (Loeb, 1924). The project researcher
+confirmed that Socrates explicitly names Empedocles and invokes effluences
+and passages in the exchange concerning color. Record
+`meno-76c-empedocles` is therefore `text_checked`, not `verified`.
+The text is linked, not republished in the preview. Independent Greek
+collation and scholarly assessment of the doctrinal relationship remain open.

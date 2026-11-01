@@ -40,13 +40,13 @@ const cards = ENGAGEMENTS.map((record) => ({
         <h2 id="tc-method">Every identification must be auditable</h2>
         <p>These records are leads for research, <strong>not an exhaustive census</strong> of historical thinkers in Plato. A record cannot contribute to a verified count without primary Greek text, a cited edition, a scholarly reference, and documented review.</p>
         <div class="tc-stats" aria-label="Current pilot counts">
-          <div><strong>{ENGAGEMENTS.length}</strong><span>Candidate passage records</span></div>
+          <div><strong>{ENGAGEMENTS.length}</strong><span>Research records</span></div>
           <div><strong>{verified.length}</strong><span>Evidence records passing verification gate</span></div>
           <div><strong>{distinct}</strong><span>Distinct verified thinkers</span></div>
         </div>
-        <label class="tc-label" for="tc-filter">Filter candidate passages</label>
+        <label class="tc-label" for="tc-filter">Filter passage records</label>
         <input id="tc-filter" type="search" placeholder="Thinker, dialogue, doctrine, passage…" autocomplete="off" />
-        <p class="tc-result" id="tc-result" aria-live="polite">{cards.length} candidate record(s) shown</p>
+        <p class="tc-result" id="tc-result" aria-live="polite">{cards.length} research record(s) shown</p>
         <div class="tc-list" id="tc-list">
           {cards.map((e) => (
             <article
@@ -56,11 +56,13 @@ const cards = ENGAGEMENTS.map((record) => ({
             >
               <div class="tc-topline">
                 <span class="tc-name">{e.person?.name ?? 'Unresolved identity'}</span>
-                <span class="tc-status">{e.status === 'candidate' ? 'Awaiting source verification' : e.status.replaceAll('_', ' ')}</span>
+                <span class="tc-status">{e.status === 'candidate' ? 'Awaiting source verification' : e.status === 'text_checked' ? 'Text checked; scholarly review pending' : e.status.replaceAll('_', ' ')}</span>
               </div>
               <p class="tc-ref"><cite>{e.workId}</cite> {e.stephanus} · {e.kind === 'explicit_name' ? 'Explicit name — proposed' : e.kind.replaceAll('_', ' ')}</p>
               <p class="tc-claim">{e.doctrinalClaim}</p>
               <p class="tc-note">{e.interpretiveNote}</p>
+              {e.sourceEdition && <p class="tc-note"><strong>Text consulted:</strong> {e.sourceEdition}</p>}
+              {e.sourceIdentifier && <p class="tc-note"><strong>Source:</strong> <a href={e.sourceIdentifier} target="_blank" rel="noopener noreferrer">Open documented edition</a></p>}
               <p class="tc-note"><strong>Audit:</strong> {e.reviewNote ?? 'No review notes recorded.'}</p>
               <a class="tc-open" href={e.href}>Open passage in the reader →</a>
             </article>
