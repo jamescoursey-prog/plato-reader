@@ -24,6 +24,7 @@ class CorpusMasterScanTest(unittest.TestCase):
         self.assertEqual(CORPUS["works"][-1]["title"],"Critias")
         self.assertEqual(len(CORPUS["works"]),26)
         self.assertIn("θαλεω",plain)  # Θάλεώ in Republic 600a
+        self.assertIn("μελισσοι",plain)  # Theaetetus 180e plural name
         self.assertEqual(next(p for p in ROSTER["people"] if p["id"]=="euthydemus")["review_flag"],
                          "identity_and_historicity_debated")
         self.assertEqual(next(p for p in ROSTER["people"] if p["id"]=="dionysodorus")["review_flag"],
@@ -45,8 +46,8 @@ class CorpusMasterScanTest(unittest.TestCase):
             report=scan_corpus(c,ROSTER,path)
             self.assertEqual(report["works_scanned"],26)
             self.assertEqual(report["name_occurrences"],26*5)
-            self.assertEqual(report["matched_sections"],26*5)
-            self.assertEqual(report["people_with_hits"],5)
+            self.assertEqual(report["matched_sections"],26*4)
+            self.assertEqual(report["people_with_hits"],4)
             self.assertFalse(any(m["person_id"]=="protagoras" for m in report["matches"]))
             self.assertTrue(any(m["person_id"]=="melissus" and
                                 "Μέλισσοί" in m["tokens"] for m in report["matches"]))
