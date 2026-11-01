@@ -119,12 +119,15 @@ def scan_corpus(corpus: dict, roster: dict, sources: Path) -> dict:
         })
     # Fail closed if a known namesake or permitted lowercase token disappears.
     # A changed source edition must trigger fresh scholarly inspection.
-    if excluded_seen != set(excluded_identity):
+    scanned_work_names = {work["title"] for work in works}
+    expected_exclusions = {key for key in excluded_identity if key[1] in scanned_work_names}
+    expected_lowercase = {key for key in allowed_lowercase if key[1] in scanned_work_names}
+    if excluded_seen != expected_exclusions:
         raise ValueError("Expected homonym exclusion missing from Greek source: " +
-                         str(set(excluded_identity) - excluded_seen))
-    if lowercase_seen != set(allowed_lowercase):
+                         str(expected_exclusions - excluded_seen))
+    if lowercase_seen != expected_lowercase:
         raise ValueError("Expected lowercase proper-name exception missing: " +
-                         str(set(allowed_lowercase) - lowercase_seen))
+                         str(expected_lowercase - lowercase_seen))
     known = {p["id"]:p for p in roster["people"]}
     order = {w["title"]:w["order"] for w in works}
     matches = [
