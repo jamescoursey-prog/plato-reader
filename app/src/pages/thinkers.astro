@@ -1,0 +1,123 @@
+---
+import ThemeInit from '../components/ThemeInit.astro';
+import Fonts from '../components/Fonts.astro';
+import Pwa from '../components/Pwa.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import PageHead from '../components/PageHead.astro';
+import { THINKERS, ENGAGEMENTS, PILOT_WORKS, verifiedEngagements, distinctVerifiedThinkerCount, readerHref } from '../lib/thinker-concordance';
+import '@shared/styles/global.css';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const verified = verifiedEngagements(ENGAGEMENTS);
+const distinct = distinctVerifiedThinkerCount(ENGAGEMENTS);
+const cards = ENGAGEMENTS.map((record) => ({
+  ...record,
+  person: THINKERS.find((person) => person.id === record.thinkerId),
+  href: readerHref(record, base),
+}));
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <ThemeInit />
+    <title>Historical Thinkers — Plato Concordance Pilot</title>
+    <meta name="description" content="An experimental, evidence-first index of historical thinkers engaged in Plato's dialogues. No completeness claim." />
+    <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
+    <Fonts />
+    <Pwa />
+  </head>
+  <body>
+    <SiteNav current="thinkers" />
+    <main>
+      <PageHead word="ἔλεγχος" label="Research pilot">
+        <h1 class="xp-h1">Historical thinkers</h1>
+        <p class="xp-lead">A passage-level research index. Candidates are separated from independently checked evidence.</p>
+      </PageHead>
+      <section class="tc-content" aria-labelledby="tc-method">
+        <p class="tc-overline">Experimental · {PILOT_WORKS.join(' · ')}</p>
+        <h2 id="tc-method">Every identification must be auditable</h2>
+        <p>These records are leads for research, <strong>not an exhaustive census</strong> of historical thinkers in Plato. A record cannot contribute to a verified count without primary Greek text, a cited edition, a scholarly reference, and documented review.</p>
+        <div class="tc-stats" aria-label="Current pilot counts">
+          <div><strong>{ENGAGEMENTS.length}</strong><span>Candidate passage records</span></div>
+          <div><strong>{verified.length}</strong><span>Evidence records passing verification gate</span></div>
+          <div><strong>{distinct}</strong><span>Distinct verified thinkers</span></div>
+        </div>
+        <label class="tc-label" for="tc-filter">Filter candidate passages</label>
+        <input id="tc-filter" type="search" placeholder="Thinker, dialogue, doctrine, passage…" autocomplete="off" />
+        <p class="tc-result" id="tc-result" aria-live="polite">{cards.length} candidate record(s) shown</p>
+        <div class="tc-list" id="tc-list">
+          {cards.map((e) => (
+            <article
+              class="tc-card"
+              data-evidence
+              data-search={`${e.person?.name ?? ''} ${e.workId} ${e.stephanus} ${e.doctrinalClaim} ${e.interpretiveNote}`.toLowerCase()}
+            >
+              <div class="tc-topline">
+                <span class="tc-name">{e.person?.name ?? 'Unresolved identity'}</span>
+                <span class="tc-status">{e.status === 'candidate' ? 'Awaiting source verification' : e.status.replaceAll('_', ' ')}</span>
+              </div>
+              <p class="tc-ref"><cite>{e.workId}</cite> {e.stephanus} · {e.kind === 'explicit_name' ? 'Explicit name — proposed' : e.kind.replaceAll('_', ' ')}</p>
+              <p class="tc-claim">{e.doctrinalClaim}</p>
+              <p class="tc-note">{e.interpretiveNote}</p>
+              <p class="tc-note"><strong>Audit:</strong> {e.reviewNote ?? 'No review notes recorded.'}</p>
+              <a class="tc-open" href={e.href}>Open passage in the reader →</a>
+            </article>
+          ))}
+        </div>
+        <p class="tc-empty" id="tc-empty" hidden>No candidate records match this search.</p>
+        <p class="tc-disclaimer">The reader link is dependent on separately generated textual data. This fork does not contain the licensed TLG export required for a complete local corpus build. Do not interpret a missing reader page as missing evidence.</p>
+      </section>
+    </main>
+    <SiteFooter />
+    <script>
+      const input = document.querySelector<HTMLInputElement>('#tc-filter');
+      const cards = [...document.querySelectorAll<HTMLElement>('[data-evidence]')];
+      const result = document.querySelector<HTMLElement>('#tc-result');
+      const empty = document.querySelector<HTMLElement>('#tc-empty');
+      const update = () => {
+        const query = (input?.value ?? '').toLocaleLowerCase().trim();
+        let visible = 0;
+        for (const card of cards) {
+          const show = (card.dataset.search ?? '').includes(query);
+          card.hidden = !show;
+          if (show) visible++;
+        }
+        if (result) result.textContent = `${visible} candidate record(s) shown`;
+        if (empty) empty.hidden = visible !== 0;
+      };
+      input?.addEventListener('input', update);
+    </script>
+    <style>
+      .tc-content { max-width: 68rem; margin: 0 auto; padding: 2rem 3.5rem 5rem; }
+      .tc-overline, .tc-label, .tc-result, .tc-status, .tc-ref {
+        font-family: var(--font-caps); font-size: 0.76rem; letter-spacing: 0.08em;
+      }
+      .tc-overline { color: var(--accent); text-transform: uppercase; }
+      h2 { font: normal 1.8rem/1.2 var(--font-english); margin: 0.5rem 0; }
+      .tc-content > p { line-height: 1.6; }
+      .tc-stats { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1rem; margin: 2rem 0; }
+      .tc-stats div { border-top: 1px solid var(--border); padding-top: 0.75rem; display: grid; gap: 0.25rem; }
+      .tc-stats strong { font: normal 2rem/1 var(--font-english); }
+      .tc-stats span { color: var(--text-mid); font-size: 0.83rem; }
+      .tc-label { display: block; margin: 1rem 0 0.5rem; }
+      #tc-filter { display: block; width: 100%; background: transparent; color: var(--text); border: 1px solid var(--border); padding: 0.85rem; font: 1rem var(--font-english); border-radius: 0; }
+      #tc-filter:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+      .tc-result { color: var(--text-mid); }
+      .tc-card { padding: 1.25rem 0 1.75rem; border-top: 1px solid var(--border); }
+      .tc-card[hidden], .tc-empty[hidden] { display: none; }
+      .tc-topline { display: flex; gap: 0.75rem; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
+      .tc-name { font: normal 1.5rem/1.2 var(--font-english); }
+      .tc-status { color: var(--accent-2); }
+      .tc-ref { color: var(--text-mid); margin: 0.55rem 0; }
+      .tc-claim { font-size: 1.1rem; line-height: 1.45; }
+      .tc-note, .tc-disclaimer { color: var(--text-mid); font-size: 0.92rem; }
+      .tc-open { color: var(--accent); text-underline-offset: 0.2em; }
+      @media (max-width: 680px) {
+        .tc-content { padding: 1.5rem 1.25rem 3rem; }
+        .tc-stats { grid-template-columns: 1fr; }
+      }
+    </style>
+  </body>
+</html>
