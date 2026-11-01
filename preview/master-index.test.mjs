@@ -52,7 +52,7 @@ describe('26-dialogue, 31-name master index',()=>{
   assert.match(html,/name="viewport"/);
   assert.match(html,/@media\(max-width:650px\)/);
   assert.match(html,/id="find"/);
-  assert.match(html,/addEventListener\('input',search\)/);
+  assert.match(html,/addEventListener\(["']input["'],search\)/);
   assert.match(html,/noopener noreferrer/);
   assert.doesNotMatch(html,/<iframe|<script[^>]+src=|<link[^>]+\.woff/);
  });
