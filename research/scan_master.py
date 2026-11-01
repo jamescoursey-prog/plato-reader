@@ -147,6 +147,19 @@ def main():
     for w in report["sources"]:
         print(f"  {w['order']:02} {w['work']}: {w['sections_scanned']} sections, "
               f"{w['name_occurrences']} name tokens ({w['first_section']}–{w['last_section']})")
+    # Log an inspectable, name-by-dialogue identity review queue (no Greek text).
+    from collections import defaultdict
+    by_person_work = defaultdict(list)
+    for row in report["matches"]:
+        by_person_work[(row["person_id"], row["work"])].append(row["section"])
+    print("IDENTITY AUDIT QUEUE (name => work: cited Stephanus sections):")
+    for person in roster["people"]:
+        works = [(work["title"], by_person_work[(person["id"], work["title"])])
+                 for work in corpus["works"]
+                 if by_person_work[(person["id"], work["title"])]]
+        print(f"  {person['name']}: "
+              + ("; ".join(f"{title}: {', '.join(locations)}"
+                           for title, locations in works) if works else "NONE"))
     print("Seed roster, sorted by the defined category/name sequence:")
     for item in report["people"]:
         print(f"  {item['name']}: {item['sections']} cited sections in "
