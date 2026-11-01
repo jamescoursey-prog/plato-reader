@@ -1,0 +1,39 @@
+{
+  "sections_scanned": 262,
+  "first_section": "216a",
+  "last_section": "268d",
+  "total_name_occurrences": 10,
+  "distinct_mentioned_sections": 8,
+  "identities": {
+    "parmenides": {
+      "occurrences": 7,
+      "sections": [
+        "216a",
+        "217c",
+        "237a",
+        "241d",
+        "242c",
+        "244e",
+        "258c"
+      ]
+    },
+    "zeno": {
+      "occurrences": 1,
+      "sections": [
+        "216a"
+      ]
+    },
+    "xenophanes": {
+      "occurrences": 1,
+      "sections": [
+        "242d"
+      ]
+    },
+    "homer": {
+      "occurrences": 1,
+      "sections": [
+        "216a"
+      ]
+    }
+  }
+}

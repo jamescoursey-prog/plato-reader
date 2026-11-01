@@ -1,23 +1,14 @@
 #!/usr/bin/env python3
-"""Audit candidate explicit intellectual names in Plato's Theaetetus.
-
-Reuses Meno's TEI/Stephanus parsing; all Greek input stays temporary.
-The lexicon is a research aid, not evidence of complete coverage.
-"""
+"""Theaetetus configuration for the common Greek name scanner."""
 from __future__ import annotations
-
 import argparse
-from collections import Counter, defaultdict
 import json
 from pathlib import Path
-import unicodedata
-from research.meno_name_scan import greek_sections, fold, WORD_RE, compare
+from research.greek_name_scan import scan_names, fold, WORD_RE, greek_sections, compare
 
 REV = "a6eb0cc3e6f6e382934a2c8b33577d2fb4371e00"
-SOURCE_URL = (
-    "https://raw.githubusercontent.com/PerseusDL/canonical-greekLit/"
-    + REV + "/data/tlg0059/tlg006/tlg0059.tlg006.perseus-grc2.xml"
-)
+SOURCE_URL = ("https://raw.githubusercontent.com/PerseusDL/canonical-greekLit/"
+              + REV + "/data/tlg0059/tlg006/tlg0059.tlg006.perseus-grc2.xml")
 URN = "urn:cts:greekLit:tlg0059.tlg006.perseus-grc2"
 
 INTELLECTUALS = {
@@ -98,77 +89,14 @@ EXCLUDE = {
     },
 }
 
-def classify(token: str):
-    # This avoids lowercase μέλισσον ("bee") being treated as Melissus.
-    if not token[0].isupper():
-        return ("none", "", "", "")
-    normal = fold(token)
-    for category, entries in EXCLUDE.items():
-        for label, stems in entries.items():
-            if any(normal.startswith(stem) for stem in stems):
-                return ("excluded", "", label, category)
-    for name_id, (name, category, stems) in INTELLECTUALS.items():
-        if any(normal.startswith(stem) for stem in stems):
-            return ("intellectual", name_id, name, category)
-    return ("unclassified", "", "", "")
-
-def scan(xml: bytes):
-    sections = greek_sections(xml)
-    matches = []
-    excluded = defaultdict(Counter)
-    unmatched = defaultdict(set)
-    for locus, text in sections:
-        for word in WORD_RE.finditer(unicodedata.normalize("NFC", text)):
-            token = word.group()
-            kind, name_id, name, category = classify(token)
-            if kind == "intellectual":
-                matches.append({"id": name_id, "name": name, "category": category,
-                                "locus": locus, "token": token})
-            elif kind == "excluded":
-                excluded[(name, category)][locus] += 1
-            elif kind == "unclassified":
-                unmatched[token].add(locus)
-    identities = []
-    for name_id, (name, category, _) in INTELLECTUALS.items():
-        these = [m for m in matches if m["id"] == name_id]
-        if these:
-            identities.append({"id": name_id, "name": name, "category": category,
-                               "occurrences": len(these),
-                               "sections": list(dict.fromkeys(m["locus"] for m in these))})
-    identities.sort(key=lambda item: item["name"])
-    return {
-        "work": "Theaetetus",
-        "text_urn": URN,
-        "source_url": SOURCE_URL,
-        "license": "PerseusDL/canonical-greekLit, CC BY-SA 4.0",
-        "source_editor": "John Burnet, Platonis Opera (1903)",
-        "method": "Greek TEI body with Stephanus milestones; capitalized, accent-folded names",
-        "sections_scanned": len(sections),
-        "first_section": sections[0][0],
-        "last_section": sections[-1][0],
-        "intellectual_identities": identities,
-        "mentions": matches,
-        "total_name_occurrences": len(matches),
-        "distinct_mentioned_sections": len({m["locus"] for m in matches}),
-        "excluded_capitalized_names": [
-            {"name": name, "classification": reason, "sections": sorted(loci),
-             "occurrences": sum(loci.values())}
-            for (name, reason), loci in sorted(excluded.items())
-        ],
-        "unclassified_capitalized_tokens": [
-            {"token": token, "sections": sorted(loci)}
-            for token, loci in sorted(unmatched.items())
-        ],
-        "review": {
-            "status": "machine candidate; not text-checked or scholar-verified",
-            "limitations": [
-                "Lexicon limited to inspected names; indirect allusions not scanned",
-                "Melissus at 180e appears in pluralized form; interpretation remains open",
-                "Poets are included as intellectual authorities",
-                "No Greek passage or translation is published"
-            ]
-        }
-    }
+def scan(xml: bytes) -> dict:
+    return scan_names(
+        xml, work="Theaetetus", source_url=SOURCE_URL, urn=URN,
+        intellectuals=INTELLECTUALS, exclusions=EXCLUDE,
+        capital_only=True, exclude_first=True,
+        editor="John Burnet, Platonis Opera (1903)",
+        additional_limitations=["Melissus at 180e uses a pluralized expression."]
+    )
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
