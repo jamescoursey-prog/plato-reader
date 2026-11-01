@@ -11,6 +11,10 @@ if(data.version!=='0.1'||data.source_revision!==REV||data.works_scanned!==26||
 const people=new Map(data.people.map(p=>[p.id,p]));
 const sources=new Map(data.sources.map(s=>[s.work,s]));
 const matches=new Map(data.people.map(p=>[p.id,[]]));
+if(!Array.isArray(data.identity_exclusions)||!Array.isArray(data.lowercase_name_exceptions)||
+   data.identity_exclusions.length!==2||data.lowercase_name_exceptions.length!==2)
+  throw Error('Missing independently audited identity exceptions');
+
 const esc=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 for(const s of data.sources){
  const prefix='https://raw.githubusercontent.com/PerseusDL/canonical-greekLit/'+REV+'/data/tlg0059/';
@@ -80,7 +84,10 @@ const html=['<!doctype html><html lang="en"><head><meta charset="utf-8">',
  '<div><strong>'+data.people_with_hits+'</strong><span>Thinkers with matches</span></div>',
  '<div><strong>'+data.matched_sections+'</strong><span>Person–passage candidates</span></div>',
  '</div><p class="disclaimer"><strong>Provisional:</strong> These names and Stephanus references are automated candidates, not independently verified identities or philosophical engagements. Namesakes and missing Greek inflections require checking. Existing reviewed records are unchanged.</p>',
- '<p><a href="./master-index.csv">Download the candidate citations (CSV)</a></p></section>',
+ '<p><a href="./master-index.csv">Download the candidate citations (CSV)</a></p>',
+ '<p class="muted">Source-checked corrections: '+data.identity_exclusions.length+
+ ' references to namesakes excluded; '+data.lowercase_name_exceptions.length+
+ ' lowercase proper names included with passage-specific evidence. Other identifications remain provisional.</p></section>',
  '<label for="find">Find a thinker</label>',
  '<input id="find" type="search" placeholder="Search thinker names..." autocomplete="off">',
  '<p id="shown" class="muted" aria-live="polite"></p>',

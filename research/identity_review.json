@@ -1,0 +1,56 @@
+{
+  "version": "0.1",
+  "purpose": "Passage-specific source-checked exceptions to a conservative roster scan; no blanket identity approval",
+  "excluded_identity": [
+    {
+      "id": "euthydemus",
+      "work": "Republic",
+      "section": "328b",
+      "wrong_identity": "Euthydemus son of Cephalus, brother of Polemarchus",
+      "reference": "https://classics.mit.edu/Plato/republic.1.introduction.html",
+      "cross_check": "Evelyn Abbott, A Subject-Index to the Dialogues of Plato (1875), under Euthydemus"
+    },
+    {
+      "id": "euthydemus",
+      "work": "Symposium",
+      "section": "222b",
+      "wrong_identity": "Euthydemus son of Diocles",
+      "reference": "https://plato.johnhboyer.com/Symposium/book/1/?loc=222b",
+      "cross_check": "Evelyn Abbott, A Subject-Index to the Dialogues of Plato (1875), under Euthydemus"
+    }
+  ],
+  "allowed_lowercase": [
+    {
+      "id": "prodicus",
+      "work": "Laches",
+      "section": "197d",
+      "token": "προδίκῳ",
+      "reference": "https://plato.johnhboyer.com/Laches/book/1/?loc=197d",
+      "reason": "Socrates explicitly names the sophist; Burnet's Greek has a lowercase initial"
+    },
+    {
+      "id": "prodicus",
+      "work": "Theaetetus",
+      "section": "151b",
+      "token": "προδίκῳ",
+      "reference": "https://plato.johnhboyer.com/Theaetetus/book/1/?loc=151b",
+      "reason": "Socrates names Prodicus as an alternative teacher; Burnet's Greek has a lowercase initial"
+    }
+  ],
+  "documented_positive": [
+    {
+      "id": "euthydemus",
+      "work": "Cratylus",
+      "section": "386d",
+      "reference": "https://digicoll.lib.berkeley.edu/record/205907/files/b20762571_B000771950.pdf",
+      "reason": "Abbott indexes Euthydemus of Chios' thesis at Cratylus 386d"
+    },
+    {
+      "id": "agathon",
+      "work": "Protagoras",
+      "section": "315e",
+      "reference": "https://academic.oup.com/edited-volume/61673/chapter-abstract/548066461",
+      "reason": "Oxford Classical Dictionary explicitly identifies the boy Agathon of Protagoras with the tragedian"
+    }
+  ]
+}

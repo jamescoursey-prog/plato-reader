@@ -56,6 +56,24 @@ def scan_corpus(corpus: dict, roster: dict, sources: Path) -> dict:
     if [w["order"] for w in works] != list(range(1,27)):
         raise ValueError("Dialogue sequence must be numbered 1–26")
     plain, sensitive = build_lexicon(roster)
+    identity_review = json.loads(
+        (Path(__file__).with_name("identity_review.json")).read_text(encoding="utf-8")
+    )
+    excluded_identity = {
+        (r["id"], r["work"], r["section"]): r
+        for r in identity_review["excluded_identity"]
+    }
+    allowed_lowercase = {
+        (r["id"], r["work"], r["section"], fold(r["token"])): r
+        for r in identity_review["allowed_lowercase"]
+    }
+    if len(excluded_identity) != len(identity_review["excluded_identity"]) or (
+        len(allowed_lowercase) != len(identity_review["allowed_lowercase"])
+    ):
+        raise ValueError("Duplicated research identity exceptions")
+    excluded_seen = set()
+    lowercase_seen = set()
+    excluded_matches = []
     by_person_section = defaultdict(lambda: {"tokens": [], "occurrences": 0})
     audits = []
     for work in works:
@@ -68,10 +86,23 @@ def scan_corpus(corpus: dict, roster: dict, sources: Path) -> dict:
         for locus, text in sections:
             for hit in WORD_RE.finditer(unicodedata.normalize("NFC", text)):
                 token = hit.group()
-                if not token[0].isupper():
-                    continue
                 entry = sensitive.get(accent_exact(token)) or plain.get(fold(token))
                 if entry is None:
+                    continue
+                context_key = (entry["id"], work["title"], locus)
+                if not token[0].isupper():
+                    lower_key = (*context_key, fold(token))
+                    if lower_key not in allowed_lowercase:
+                        continue
+                    lowercase_seen.add(lower_key)
+                if context_key in excluded_identity:
+                    excluded_seen.add(context_key)
+                    excluded_matches.append({
+                        "person_id": entry["id"], "work": work["title"],
+                        "section": locus, "token": token,
+                        "identified_as": excluded_identity[context_key]["wrong_identity"],
+                        "reference": excluded_identity[context_key]["reference"]
+                    })
                     continue
                 combined = (entry["id"], work["title"], locus)
                 row = by_person_section[combined]
@@ -86,6 +117,14 @@ def scan_corpus(corpus: dict, roster: dict, sources: Path) -> dict:
             "source_url":source_url(work),
             "urn":"urn:cts:greekLit:tlg0059."+key+"."+work["edition"]
         })
+    # Fail closed if a known namesake or permitted lowercase token disappears.
+    # A changed source edition must trigger fresh scholarly inspection.
+    if excluded_seen != set(excluded_identity):
+        raise ValueError("Expected homonym exclusion missing from Greek source: " +
+                         str(set(excluded_identity) - excluded_seen))
+    if lowercase_seen != set(allowed_lowercase):
+        raise ValueError("Expected lowercase proper-name exception missing: " +
+                         str(set(allowed_lowercase) - lowercase_seen))
     known = {p["id"]:p for p in roster["people"]}
     order = {w["title"]:w["order"] for w in works}
     matches = [
@@ -117,9 +156,15 @@ def scan_corpus(corpus: dict, roster: dict, sources: Path) -> dict:
         "matched_sections":len(matches),
         "name_occurrences":sum(m["occurrences"] for m in matches),
         "sources":audits,"people":people,"matches":matches,
+        "identity_exclusions":excluded_matches,
+        "lowercase_name_exceptions": [
+            {"person_id":key[0],"work":key[1],"section":key[2],
+             "source_url":allowed_lowercase[key]["reference"]}
+            for key in sorted(lowercase_seen)
+        ],
         "limitations":[
             "Only exact Greek forms specified in the starter roster are accepted; omissions are expected.",
-            "Capitals in the selected Greek edition constrain recall.",
+            "Most matches require capitalization; exceptions are separately documented and source-checked.",
             "Some historical names have homonyms. Identity flags request review.",
             "Name matching is not a checked identification or doctrinal engagement.",
             "An individual named in a work title or editorial note is not a text mention.",
