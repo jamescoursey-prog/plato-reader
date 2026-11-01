@@ -1,6 +1,6 @@
 """Fixture tests for the Meno scanner; no copyrighted passage reproduced."""
 import unittest
-from meno_name_scan import scan, compare
+from research.meno_name_scan import scan, compare
 
 FAKE_TEI = b'''<TEI xmlns="http://www.tei-c.org/ns/1.0">
 <teiHeader><title>Gorgias is metadata, not text</title></teiHeader>
