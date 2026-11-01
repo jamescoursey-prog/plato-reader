@@ -13,8 +13,11 @@ broader corpus without treating those additional works as research results.
 ## What this first change does
 
 - Adds a **Thinkers** navigation item and `/thinkers` research-pilot page.
-- Adds a typed, source-first data model, a single Empedocles/*Meno* 76c–d
-  research record (now **text checked**), a reader deep link, and a filter.
+- Adds a typed, source-first data model and two records for the same thinker:
+  Empedocles in *Meno* 76c–d (**text checked**) and *Theaetetus* 152e
+  (**candidate**), with separate passage links, review notes, and status.
+- The preview distinguishes **two passage records** from **one indexed thinker**,
+  while keeping verified-engagement counts at zero.
 - Adds tests ensuring candidate observations do not inflate certified
   thinker counts. Even a `verified` flag is insufficient without explicit
   provenance and a reviewer field.
@@ -73,3 +76,19 @@ and passages in the exchange concerning color. Record
 `meno-76c-empedocles` is therefore `text_checked`, not `verified`.
 The text is linked, not republished in the preview. Independent Greek
 collation and scholarly assessment of the doctrinal relationship remain open.
+
+## Second candidate: Empedocles in Theaetetus 152e (2026-11-01)
+
+At *Theaetetus* 152e, Socrates explicitly names Empedocles in a group
+that includes Protagoras and Heraclitus while discussing the view that
+things come to be through motion and change; Parmenides is excluded.
+Passage located via https://plato.johnhboyer.com/Theaetetus/book/1/
+and the Perseus English passage at
+https://atlas.perseus.tufts.edu/library/passage/urn%3Acts%3AgreekLit%3Atlg0059.tlg006.perseus-eng2%3A152-156/ .
+The entry remains **candidate** pending project-researcher text check,
+independent collation, and assessment of whether Socrates' grouping
+accurately reflects Empedocles' own doctrine. No original Greek or
+translation text was copied into the public preview.
+
+The app indexes **records** and **thinkers** separately: multiple passages
+may identify the same thinker without multiplying the distinct-person count.

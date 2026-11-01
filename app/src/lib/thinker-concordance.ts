@@ -58,6 +58,19 @@ export const ENGAGEMENTS: readonly Engagement[] = [
     reviewedBy: 'Project researcher (passage check)',
     reviewNote: '2026-11-01: Project researcher confirmed that Meno 76c–d explicitly names Empedocles and associates effluences and passages with an explanation of color. Text checked against the cited reader; independent Greek collation and secondary scholarship are still pending.',
   },
+  {
+    id: 'theaetetus-152e-empedocles',
+    thinkerId: 'empedocles',
+    workId: 'Theaetetus',
+    stephanus: '152e',
+    startSection: '152e',
+    kind: 'explicit_name',
+    doctrinalClaim: 'Socrates names Empedocles among thinkers he associates with motion and becoming, while distinguishing Parmenides.',
+    interpretiveNote: 'Socrates groups several historical figures under a broad account of flux. Whether this accurately represents Empedocles’ own position requires independent historical analysis.',
+    status: 'candidate',
+    sourceIdentifier: 'https://plato.johnhboyer.com/Theaetetus/book/1/',
+    reviewNote: '2026-11-01: Passage located at Theaetetus 152e using John Boyer’s reader and the Perseus English passage index. No project-researcher text check, independent collation, or scholarly doctrinal review is recorded.',
+  },
 ];
 
 /**
@@ -76,6 +89,11 @@ export function isCountable(e: Engagement): boolean {
 
 export function verifiedEngagements(records: readonly Engagement[]): Engagement[] {
   return records.filter(isCountable);
+}
+
+/** Counts represented identities, including provisional records, excluding rejected leads. */
+export function distinctIndexedThinkerCount(records: readonly Engagement[]): number {
+  return new Set(records.filter((e) => e.status !== 'rejected').map((e) => e.thinkerId)).size;
 }
 
 export function distinctVerifiedThinkerCount(records: readonly Engagement[]): number {

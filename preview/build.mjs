@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 import {
   THINKERS, ENGAGEMENTS, PILOT_WORKS,
-  verifiedEngagements, distinctVerifiedThinkerCount,
+  verifiedEngagements, distinctIndexedThinkerCount,
 } from '../app/src/lib/thinker-concordance.ts';
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -69,9 +69,10 @@ function renderRecord(e) {
 
 let html = await readFile(resolve(here, 'template.html'), 'utf8');
 const replacements = {
-  '%%OPEN_RECORDS%%': String(ENGAGEMENTS.filter((e) => e.status === 'candidate' || e.status === 'text_checked').length),
+  '%%PASSAGES%%': String(ENGAGEMENTS.length),
+  '%%INDEXED_THINKERS%%': String(distinctIndexedThinkerCount(ENGAGEMENTS)),
+  '%%TEXT_CHECKED%%': String(ENGAGEMENTS.filter((e) => e.status === 'text_checked').length),
   '%%VERIFIED%%': String(verifiedEngagements(ENGAGEMENTS).length),
-  '%%PEOPLE%%': String(distinctVerifiedThinkerCount(ENGAGEMENTS)),
   '%%PILOT_WORKS%%': escapeHtml(PILOT_WORKS.join(' · ')),
   '%%RECORDS%%': ENGAGEMENTS.map(renderRecord).join('\n'),
   '%%TOTAL%%': String(ENGAGEMENTS.length),

@@ -5,12 +5,13 @@ import Pwa from '../components/Pwa.astro';
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import PageHead from '../components/PageHead.astro';
-import { THINKERS, ENGAGEMENTS, PILOT_WORKS, verifiedEngagements, distinctVerifiedThinkerCount, readerHref } from '../lib/thinker-concordance';
+import { THINKERS, ENGAGEMENTS, PILOT_WORKS, verifiedEngagements, distinctIndexedThinkerCount, readerHref } from '../lib/thinker-concordance';
 import '@shared/styles/global.css';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const verified = verifiedEngagements(ENGAGEMENTS);
-const distinct = distinctVerifiedThinkerCount(ENGAGEMENTS);
+const indexedThinkers = distinctIndexedThinkerCount(ENGAGEMENTS);
+const checkedCount = ENGAGEMENTS.filter((e) => e.status === 'text_checked').length;
 const cards = ENGAGEMENTS.map((record) => ({
   ...record,
   person: THINKERS.find((person) => person.id === record.thinkerId),
@@ -40,9 +41,10 @@ const cards = ENGAGEMENTS.map((record) => ({
         <h2 id="tc-method">Every identification must be auditable</h2>
         <p>These records are leads for research, <strong>not an exhaustive census</strong> of historical thinkers in Plato. A record cannot contribute to a verified count without primary Greek text, a cited edition, a scholarly reference, and documented review.</p>
         <div class="tc-stats" aria-label="Current pilot counts">
-          <div><strong>{ENGAGEMENTS.length}</strong><span>Research records</span></div>
-          <div><strong>{verified.length}</strong><span>Evidence records passing verification gate</span></div>
-          <div><strong>{distinct}</strong><span>Distinct verified thinkers</span></div>
+          <div><strong>{ENGAGEMENTS.length}</strong><span>Passage records</span></div>
+          <div><strong>{indexedThinkers}</strong><span>Thinkers indexed</span></div>
+          <div><strong>{checkedCount}</strong><span>Text-checked records</span></div>
+          <div><strong>{verified.length}</strong><span>Verified engagements</span></div>
         </div>
         <label class="tc-label" for="tc-filter">Filter passage records</label>
         <input id="tc-filter" type="search" placeholder="Thinker, dialogue, doctrine, passage…" autocomplete="off" />
@@ -68,7 +70,7 @@ const cards = ENGAGEMENTS.map((record) => ({
             </article>
           ))}
         </div>
-        <p class="tc-empty" id="tc-empty" hidden>No candidate records match this search.</p>
+        <p class="tc-empty" id="tc-empty" hidden>No research records match this search.</p>
         <p class="tc-disclaimer">The reader link is dependent on separately generated textual data. This fork does not contain the licensed TLG export required for a complete local corpus build. Do not interpret a missing reader page as missing evidence.</p>
       </section>
     </main>
@@ -86,7 +88,7 @@ const cards = ENGAGEMENTS.map((record) => ({
           card.hidden = !show;
           if (show) visible++;
         }
-        if (result) result.textContent = `${visible} candidate record(s) shown`;
+        if (result) result.textContent = `${visible} research record(s) shown`;
         if (empty) empty.hidden = visible !== 0;
       };
       input?.addEventListener('input', update);
@@ -99,7 +101,7 @@ const cards = ENGAGEMENTS.map((record) => ({
       .tc-overline { color: var(--accent); text-transform: uppercase; }
       h2 { font: normal 1.8rem/1.2 var(--font-english); margin: 0.5rem 0; }
       .tc-content > p { line-height: 1.6; }
-      .tc-stats { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1rem; margin: 2rem 0; }
+      .tc-stats { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 1rem; margin: 2rem 0; }
       .tc-stats div { border-top: 1px solid var(--border); padding-top: 0.75rem; display: grid; gap: 0.25rem; }
       .tc-stats strong { font: normal 2rem/1 var(--font-english); }
       .tc-stats span { color: var(--text-mid); font-size: 0.83rem; }
@@ -118,7 +120,7 @@ const cards = ENGAGEMENTS.map((record) => ({
       .tc-open { color: var(--accent); text-underline-offset: 0.2em; }
       @media (max-width: 680px) {
         .tc-content { padding: 1.5rem 1.25rem 3rem; }
-        .tc-stats { grid-template-columns: 1fr; }
+        .tc-stats { grid-template-columns: repeat(2,minmax(0,1fr)); }
       }
     </style>
   </body>
