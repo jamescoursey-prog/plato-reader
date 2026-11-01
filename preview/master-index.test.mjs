@@ -21,7 +21,9 @@ describe('26-dialogue, 31-name master index',()=>{
   assert.match(html,/Euthydemus son of Cephalus/);
   assert.match(html,/Euthydemus son of Diocles/);
   assert.match(html,/Cratylus/);
-  assert.match(html,/858<\/strong>/);
+  assert.match(html,/859<\/strong>/);
+  assert.match(html,/source-checked historical identification/);
+  assert.match(html,/historical identity cautions/);
  });
  it('exports only short citation metadata',()=>{
   const lines=csv.trim().split('\n');
