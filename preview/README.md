@@ -32,3 +32,29 @@ the metadata-only CSV, `LICENSE.txt`, and `.nojekyll` are deployed.
 This is a build-time research mechanism, **not a user-initiated website
 database rebuild**. The published master index does not overwrite or
 promote the original manually assessed entries.
+
+## November 1 identity and morphology audit
+
+The 31-name roster across the 26 project dialogues now produces **858
+provisional person–section references** (1,053 Greek word matches).
+This replaces the preliminary 829/1,006 count.
+
+There are two **confirmed excluded homonyms**, documented in
+`research/identity_review.json`: `Republic` 328b is Euthydemus
+son of Cephalus, and `Symposium` 222b is Euthydemus son of Diocles,
+neither the sophist Euthydemus of Chios. `Cratylus` 386d remains
+appropriately attributed to the sophist. The reader's Greek lemma
+inventory for Euthydemus reconciles to 71 occurrences in our index
+(70 in `Euthydemus`, one in `Cratylus`).
+
+The roster now includes attested vocatives of Euthydemus and Prodicus.
+The standalone identity audit verifies lowercase Prodicus in `Laches`
+197d and `Theaetetus` 151b; against the reader's lexical inventory,
+56 Prodicus occurrences belong to this 26-dialogue selection
+(the 57th is in `Theages`, which is beyond scope). Regression guards
+reject unexpected changes to these cross-checked totals.
+
+The above is **not** certification of 858 unique historical identities.
+Most entries remain lexical candidates; the interface reports the
+two specific excluded namesake cases. We have not automatically
+promoted every candidate to scholarly-verified.

@@ -87,7 +87,13 @@ const html=['<!doctype html><html lang="en"><head><meta charset="utf-8">',
  '<p><a href="./master-index.csv">Download the candidate citations (CSV)</a></p>',
  '<p class="muted">Source-checked corrections: '+data.identity_exclusions.length+
  ' references to namesakes excluded; '+data.lowercase_name_exceptions.length+
- ' lowercase proper names included with passage-specific evidence. Other identifications remain provisional.</p></section>',
+ ' lowercase proper names specifically checked (with additional Prodicus forms allowed after lexicon comparison). Other identifications remain provisional.</p>',
+ '<details><summary>View the corrected historical identifications</summary><ul>'+
+ data.identity_exclusions.map(x=>'<li><strong>'+esc(people.get(x.person_id)?.name||x.person_id)+
+ ' — <i>'+esc(x.work)+'</i> '+esc(x.section)+'</strong>: this is '+
+ esc(x.identified_as)+', not the listed thinker. <a href="'+
+ esc(link(x.work,x.section))+'" target="_blank" rel="noopener noreferrer">Inspect the passage</a></li>').join('')+
+ '</ul></details></section>',
  '<label for="find">Find a thinker</label>',
  '<input id="find" type="search" placeholder="Search thinker names..." autocomplete="off">',
  '<p id="shown" class="muted" aria-live="polite"></p>',

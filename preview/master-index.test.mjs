@@ -18,6 +18,10 @@ describe('26-dialogue, 31-name master index',()=>{
   assert.match(html,/id="person-parmenides"/);
   assert.match(html,/id="person-anaxagoras"/);
   assert.match(html,/master-index\.csv/);
+  assert.match(html,/Euthydemus son of Cephalus/);
+  assert.match(html,/Euthydemus son of Diocles/);
+  assert.match(html,/Cratylus/);
+  assert.match(html,/858<\/strong>/);
  });
  it('exports only short citation metadata',()=>{
   const lines=csv.trim().split('\n');
