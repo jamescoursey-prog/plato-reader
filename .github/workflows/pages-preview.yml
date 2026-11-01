@@ -1,0 +1,50 @@
+name: Publish limited concordance preview
+
+on:
+  push:
+    branches:
+      - feature/thinker-concordance-pilot
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: limited-concordance-preview
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    name: Publish preview only
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build isolated preview with no licensed reading text
+        run: node --experimental-strip-types preview/build.mjs
+
+      - name: Verify published file inventory
+        run: node --experimental-strip-types --test preview/check.test.mjs
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload standalone preview only
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: preview/dist
+
+      - name: Publish limited research preview
+        id: deployment
+        uses: actions/deploy-pages@v4
